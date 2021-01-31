@@ -15,6 +15,17 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    <!-- ini adalah penggunaan 'blade directive' untuk role -->
+                    @role('admin')
+                    Anda masuk dengan role 'admin'
+                    @endrole
+                    @role('user')
+                    Anda masuk dengan role 'user'
+                    @endrole
+                    @guest
+                    Anda belum login
+                    @endguest
                 </div>
             </div>
         </div>
