@@ -35,23 +35,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/event">Event</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'home' ? ' active' : '' }}" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'blog' ? ' active' : '' }}" href="/blog">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'event' ? ' active' : '' }}" href="/event">Event</a></li>
+                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'about' ? ' active' : '' }}" href="/about">About</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                        @if (Route::has('login'))
+                        @if (Route::currentRouteName() != 'login')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @endif
 
-                        @if (Route::has('register'))
+                        @if (Route::currentRouteName() != 'register')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
