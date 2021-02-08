@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     public function index(){
-        return view('blog');
+        $count = 100;
+        return view('blog', ['count' => $count]);
     }
 }
