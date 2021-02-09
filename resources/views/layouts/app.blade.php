@@ -39,6 +39,9 @@
                         <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'blog' ? ' active' : '' }}" href="/blog">Blog</a></li>
                         <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'event' ? ' active' : '' }}" href="/event">Event</a></li>
                         <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'about' ? ' active' : '' }}" href="/about">About</a></li>
+                        @role('admin')
+                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'adminDashboard' ? ' active' : '' }}" href="/admin">Admin Page</a></li>
+                        @endrole
                     </ul>
 
                     <!-- Right Side Of Navbar -->
