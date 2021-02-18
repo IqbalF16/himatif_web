@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,4 +34,8 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('adminDashboard');
+    Route::get('/admin/summary', [AdminController::class, 'index'])->name('adminSummary');
+    Route::get('/admin/blog', [AdminController::class, 'blog'])->name('adminBlog');
+    Route::get('/admin/event', [AdminController::class, 'event'])->name('adminEvent');
+    Route::get('/admin/form', [FormController::class, 'index'])->name('adminForm');
 });
