@@ -16,6 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -36,11 +37,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'home' ? ' active' : '' }}" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'blog' ? ' active' : '' }}" href="/blog">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'event' ? ' active' : '' }}" href="/event">Event</a></li>
-                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'about' ? ' active' : '' }}" href="/about">About</a></li>
+                        <li class="nav-item"><a class="nav-link{{ strpos(url()->current(), '/blog') ? ' active' : '' }}" href="/blog">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link{{ strpos(url()->current(), '/event') ? ' active' : '' }}" href="/event">Event</a></li>
+                        <li class="nav-item"><a class="nav-link{{ strpos(url()->current(), '/about') ? ' active' : '' }}" href="/about">About</a></li>
                         @role('admin')
-                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'adminDashboard' ? ' active' : '' }}" href="/admin">Admin Page</a></li>
+                        <li class="nav-item"><a class="nav-link{{ strpos(url()->current(), '/admin') ? ' active' : '' }}" href="/admin">Admin Page</a></li>
                         @endrole
                     </ul>
 

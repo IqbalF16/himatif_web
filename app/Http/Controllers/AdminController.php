@@ -11,10 +11,17 @@ class AdminController extends Controller
     }
 
     public function blog(){
-        return view('admin.blog');
+        $count = 100;
+        return view('admin.blog', ['count' => $count]);
     }
     
     public function event(){
-        return view('admin.event');
+        $count = 100;
+        return view('admin.event', ['count' => $count]);
+    }
+
+    public function form(){
+        $count = 100;
+        return view('admin.form', ['count' => $count]);
     }
 }

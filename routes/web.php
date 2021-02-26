@@ -33,9 +33,11 @@ Route::get('/event', [EventController::class, 'index'])->name('event');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('adminDashboard');
+    Route::get('/admin', function(){
+        return redirect()->route('adminSummary');
+    })->name('adminDashboard');
     Route::get('/admin/summary', [AdminController::class, 'index'])->name('adminSummary');
     Route::get('/admin/blog', [AdminController::class, 'blog'])->name('adminBlog');
     Route::get('/admin/event', [AdminController::class, 'event'])->name('adminEvent');
-    Route::get('/admin/form', [FormController::class, 'index'])->name('adminForm');
+    Route::get('/admin/form', [AdminController::class, 'form'])->name('adminForm');
 });
