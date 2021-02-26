@@ -7,7 +7,7 @@
             <div class="card">
                 <ul class="nav flex-column nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link{{ strpos(url()->current(), '/admin/summary') || strpos(url()->current(), '/admin/summary') ? ' active' : '' }}" href="/admin/summary">Summary</a>
+                        <a class="nav-link{{ strpos(url()->current(), '/admin/summary') ? ' active' : '' }}" href="/admin/summary">Summary</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link{{ strpos(url()->current(), '/admin/blog') ? ' active' : '' }}" href="/admin/blog">Blog</a>
