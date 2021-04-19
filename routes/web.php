@@ -40,4 +40,8 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/admin/blog', [AdminController::class, 'blog'])->name('adminBlog');
     Route::get('/admin/event', [AdminController::class, 'event'])->name('adminEvent');
     Route::get('/admin/form', [AdminController::class, 'form'])->name('adminForm');
+
+    Route::get('/admin/blog/add', [AdminController::class, 'addBlog'])->name('addBlog');
+    Route::get('/admin/blog/remove', [AdminController::class, 'removeBlog'])->name('removeBlog');
+    Route::get('/admin/blog/edit', [AdminController::class, 'editBlog'])->name('editBlog');
 });

@@ -1834,6 +1834,57 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/admin/OnOff.js":
+/*!*************************************!*\
+  !*** ./resources/js/admin/OnOff.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+
+
+
+ // class OnOff extends React.Component {
+//     constructor(){
+//            super();
+//            this.state = {
+//                 black: true
+//            }
+//       }
+//       changeColor(){
+//           this.setState({black: !this.state.black})
+//       }
+//       render(){
+//           let btn_class = this.state.black ? "blackButton" : "whiteButton";
+//           return (
+//                <div>
+//                    <button className={btn_class}
+//                            onClick={this.changeColor.bind(this)}>
+//                              Button
+//                     </button>
+//                </div>
+//           )
+//       }
+//   }
+
+function tick() {
+  var element = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", {
+      children: "Hello, world!"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h2", {
+      children: ["It is ", new Date().toLocaleTimeString(), "."]
+    })]
+  });
+
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render(element, document.getElementById('root'));
+} //   ReactDOM.render(<OnOff />, document.querySelector("OnOff"))
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -1854,6 +1905,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 __webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
+
+__webpack_require__(/*! ./admin/OnOff.js */ "./resources/js/admin/OnOff.js");
 
 /***/ }),
 
