@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,7 +15,7 @@ class AdminController extends Controller
         $count = 100;
         return view('admin.blog', ['count' => $count]);
     }
-    
+
     public function event(){
         $count = 100;
         return view('admin.event', ['count' => $count]);

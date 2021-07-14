@@ -1,7 +1,7 @@
 @extends('admin.app')
 @section('admin-content')
 <h5 class="card-title border-bottom">Event</h5>
-<button class="btn btn-success w-100">Tambah Blog</button>
+<a class="btn btn-success w-100" href="{{ route('writeEvent') }}">Tambah Event</a>
 @for($i = 0; $i<=$count; $i++)
 <div class="row my-2">
     <div class="col-9">

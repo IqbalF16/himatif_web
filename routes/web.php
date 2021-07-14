@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminBlog;
+use App\Http\Controllers\Admin\AdminForm;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminEvent;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +36,7 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/event', [EventController::class, 'index'])->name('event');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
-Route::group(['middleware' => ['role:admin']], function () {
+Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function () {
     Route::get('/admin', function(){
         return redirect()->route('adminSummary');
     })->name('adminDashboard');
@@ -41,7 +45,22 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/admin/event', [AdminController::class, 'event'])->name('adminEvent');
     Route::get('/admin/form', [AdminController::class, 'form'])->name('adminForm');
 
-    Route::get('/admin/blog/add', [AdminController::class, 'addBlog'])->name('addBlog');
-    Route::get('/admin/blog/remove', [AdminController::class, 'removeBlog'])->name('removeBlog');
-    Route::get('/admin/blog/edit', [AdminController::class, 'editBlog'])->name('editBlog');
+    Route::get('/admin/blog/write', [AdminBlog::class, 'index'])->name('writeBlog');
+    Route::get('/admin/blog/add', [AdminBlog::class, 'add'])->name('addBlog');
+    Route::get('/admin/blog/remove', [AdminBlog::class, 'remove'])->name('removeBlog');
+    Route::get('/admin/blog/edit', [AdminBlog::class, 'edit'])->name('editBlog');
+
+    Route::get('/admin/event/write', [AdminEvent::class, 'index'])->name('writeEvent');
+    Route::get('/admin/event/add', [AdminEvent::class, 'add'])->name('addEvent');
+    Route::get('/admin/event/remove', [AdminEvent::class, 'remove'])->name('removeEvent');
+    Route::get('/admin/event/edit', [AdminEvent::class, 'edit'])->name('editEvent');
+
+    Route::get('/admin/form/write', [AdminForm::class, 'index'])->name('writeForm');
+    Route::get('/admin/form/add', [AdminForm::class, 'add'])->name('addForm');
+    Route::get('/admin/form/remove', [AdminForm::class, 'remove'])->name('removeForm');
+    Route::get('/admin/form/edit', [AdminForm::class, 'edit'])->name('editForm');
 });
+
+Route::get('/redirect-to-previous-url', function(){
+    return Redirect::to(url()->previous());
+})->name("back");
