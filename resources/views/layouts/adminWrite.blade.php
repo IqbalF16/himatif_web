@@ -37,8 +37,12 @@
         @endswitch
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a href="{{ route('addBlog') }}">asd</a>
-                {{ Route::currentRouteName() }}
+                <div class="title">
+                  <input type="text" class="form-control" name="blogTitle" id="blogTitle" aria-describedby="blogTitle" placeholder="Blog Title" value="New Blog">
+                </div>
+                <div>
+
+                </div>
             </div>
         </nav>
 

@@ -15,3 +15,4 @@ require('./bootstrap');
 require('./components/Example');
 
 require('./admin/OnOff.js');
+require('./admin/swithtab.js');

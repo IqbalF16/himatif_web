@@ -62,5 +62,5 @@ Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function 
 });
 
 Route::get('/redirect-to-previous-url', function(){
-    return Redirect::to(url()->previous());
+    return redirect()->route('home');
 })->name("back");
