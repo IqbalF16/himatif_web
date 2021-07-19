@@ -10,8 +10,12 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/editor.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -26,26 +30,25 @@
     <div id="app">
         @switch(Route::currentRouteName())
             @case('writeBlog')
-                <form action="{{ route('addBlog') }}" method="post">
+                <form action="{{ route('addBlog') }}" method="post" name="write" id="write">
             @break
             @case('writeEvent')
-            <form action="{{ route('addEvent') }}" method="post">
+                <form action="{{ route('addEvent') }}" method="post" name="write" id="write">
             @break
             @case('writeForm')
-            <form action="{{ route('addForm') }}" method="post">
+                <form action="{{ route('addForm') }}" method="post" name="write" id="write">
             @break
         @endswitch
+        @csrf
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <div class="title">
-                  <input type="text" class="form-control" name="blogTitle" id="blogTitle" aria-describedby="blogTitle" placeholder="Blog Title" value="New Blog">
+                    <input type="text" class="form-control" name="title" id="title" aria-describedby="title"
+                        placeholder="Blog Title" value="New Blog">
                 </div>
-                <div>
-
-                </div>
+                <button type="submit" class="btn btn-primary" name="write">Submit</button>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>

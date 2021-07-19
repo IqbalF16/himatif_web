@@ -46,7 +46,7 @@ Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function 
     Route::get('/admin/form', [AdminController::class, 'form'])->name('adminForm');
 
     Route::get('/admin/blog/write', [AdminBlog::class, 'index'])->name('writeBlog');
-    Route::get('/admin/blog/add', [AdminBlog::class, 'add'])->name('addBlog');
+    Route::post('/admin/blog/add', [AdminBlog::class, 'add'])->name('addBlog');
     Route::get('/admin/blog/remove', [AdminBlog::class, 'remove'])->name('removeBlog');
     Route::get('/admin/blog/edit', [AdminBlog::class, 'edit'])->name('editBlog');
 

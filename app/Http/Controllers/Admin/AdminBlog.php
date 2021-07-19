@@ -11,8 +11,8 @@ class AdminBlog extends Controller
         return view("admin.writeBlog");
     }
 
-    public function add(){
-
+    public function add(Request $request){
+        dd($request);
     }
 
     public function remove(){
