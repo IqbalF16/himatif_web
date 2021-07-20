@@ -3,16 +3,16 @@
 @section('content')
 <div class="container">
     <div class="card-columns">
-        @for ($i = 1; $i <= $count; $i++)
+        @foreach($blogs as $blog)
         <div class="card">
-            <img class="card-img-top" src="{{asset('storage/images/mountain.jpg')}}" alt="Card image" style="width:100%">
+            <img class="card-img-top" src="{{ $blog->thumbnile }}" alt="Card image" style="width:100%">
             <div class="card-body">
-                <h4 class="card-title">John Doe</h4>
+                <h4 class="card-title">{{ $blog->title }}</h4>
                 <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
                 <a href="#" class="btn btn-primary stretched-link">See Profile</a>
             </div>
         </div>
-        @endfor
+        @endforeach
     </div>
 </div>
 @endsection

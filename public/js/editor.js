@@ -3,12 +3,12 @@ $("#markdown").keyup(function (event) {
     text = $(this).val();
     $("#preview").html(text);
 });
-var markdown = simplemde.value();
-$.ajax({
-    type: "POST",  //type of method
-    url: "add",  //your page
-    data: { markdown: markdown },// passing the values
-    success: function (res) {
-        //do what you want here...
-    }
+simplemde.codemirror.on("change", function(){
+	$('#result').val(simplemde.value());
+});
+$(document).ready(function () {
+    $('#btn-preview').click(function (e) {
+        var markdown = simplemde.value();
+        $('#preview').html(markdown);
+    });
 });
