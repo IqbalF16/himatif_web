@@ -19,7 +19,7 @@
                     <td scope="row" class="align-middle">{{ (Str::length($blog->title) >= 75) ? substr($blog->title,0, 75)."..." : substr($blog->title,0, 75) }}</td>
                     <td class="align-middle"><a name="edit" id="edit" class="btn btn-primary col h-100" href="#"
                             role="button"><i class="fa fa-edit"></i></a></td>
-                    <td class="align-middle"><a name="delete" id="delete" class="btn btn-danger col" href="#"
+                    <td class="align-middle"><a name="delete" id="delete" class="btn btn-danger col" href="{{ route('deleteBlog', $blog->title_route) }}"
                             role="button"><i class="fa fa-trash"></i></a></td>
                 </tr>
             @endforeach

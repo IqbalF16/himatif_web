@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\DB;
 class BlogController extends Controller
 {
     public function index(){
-        $blogs = DB::table('blogs')->select('title', 'thumbnail', 'markdown')->get();
+        $blogs = DB::table('blogs')->select('title_route', 'title', 'thumbnail', 'markdown')->get();
         return view('blog', ['blogs' => $blogs]);
+    }
+
+    public function view($route_title){
+        dd($route_title);
     }
 }

@@ -11,7 +11,7 @@
                         <h4 class="card-title">
                             {{ Str::length($blog->title) >= 75 ? substr($blog->title, 0, 75) . '...' : substr($blog->title, 0, 30) }}
                         </h4>
-                        <a href="#" class="btn btn-primary stretched-link" data-toggle="tooltip"
+                        <a href="{{ route('viewBlog', ['route_title' => $blog->title_route]) }}" class="btn btn-primary stretched-link" data-toggle="tooltip"
                             title="{{ $blog->title }}">See Profile</a>
                     </div>
                 </div>

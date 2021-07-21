@@ -15,7 +15,7 @@ class AdminEvent extends Controller
 
     }
 
-    public function remove(){
+    public function delete(){
 
     }
 

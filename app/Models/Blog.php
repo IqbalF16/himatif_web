@@ -9,6 +9,7 @@ class Blog extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'title_route',
         'title',
         'thumbnail',
         'markdown',

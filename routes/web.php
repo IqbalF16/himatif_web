@@ -36,6 +36,10 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/event', [EventController::class, 'index'])->name('event');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
+Route::get('/blog/view/{route_title}', [BlogController::class, 'view'])->name('viewBlog');
+Route::get('/event', [EventController::class, 'index'])->name('event');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+
 Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function () {
     Route::get('/admin', function(){
         return redirect()->route('adminSummary');
@@ -47,17 +51,17 @@ Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function 
 
     Route::get('/admin/blog/write', [AdminBlog::class, 'index'])->name('writeBlog');
     Route::post('/admin/blog/add', [AdminBlog::class, 'add'])->name('addBlog');
-    Route::get('/admin/blog/remove', [AdminBlog::class, 'remove'])->name('removeBlog');
+    Route::get('/admin/blog/{delete}', [AdminBlog::class, 'delete'])->name('deleteBlog');
     Route::get('/admin/blog/edit', [AdminBlog::class, 'edit'])->name('editBlog');
 
     Route::get('/admin/event/write', [AdminEvent::class, 'index'])->name('writeEvent');
     Route::get('/admin/event/add', [AdminEvent::class, 'add'])->name('addEvent');
-    Route::get('/admin/event/remove', [AdminEvent::class, 'remove'])->name('removeEvent');
+    Route::get('/admin/event/delete', [AdminEvent::class, 'delete'])->name('deleteEvent');
     Route::get('/admin/event/edit', [AdminEvent::class, 'edit'])->name('editEvent');
 
     Route::get('/admin/form/write', [AdminForm::class, 'index'])->name('writeForm');
     Route::get('/admin/form/add', [AdminForm::class, 'add'])->name('addForm');
-    Route::get('/admin/form/remove', [AdminForm::class, 'remove'])->name('removeForm');
+    Route::get('/admin/form/delete', [AdminForm::class, 'delete'])->name('deleteForm');
     Route::get('/admin/form/edit', [AdminForm::class, 'edit'])->name('editForm');
 });
 

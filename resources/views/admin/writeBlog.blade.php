@@ -5,8 +5,8 @@
 
         </div>
         <label for="thumbnail">Thumbnail: </label>
-        <input type="text" name="thumbnail" id="thumbnail" placeholder="Link to Image">
-        <img src="{{ asset('storage/images/preview.png') }}" width="auto" height="50vh" id="thumbnail-preview">
+        <input type="text" name="thumbnail" id="thumbnail" placeholder="Link to Image" required>
+        <img src="{{ asset('storage/images/preview.png') }}" width="auto" height="50vh" id="thumbnail-preview" required>
         @if ($errors->has('thumbnail'))
             <span class="text-danger">{{ $errors->first('thumbnail') }}</span>
         @endif

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Parsedown;
 
 class AdminBlog extends Controller
@@ -25,8 +27,12 @@ class AdminBlog extends Controller
             'thumbnail.required' => 'Thumbnail is required',
             'makrdown.required' => 'Markdown is required',
         ]);
-        // dd($validated);
+
+        $date = Carbon::now();
+        $date = str_replace('-', '', $date->toDateString());
+        $title_route = $date."-".$request->title;
         Blog::create([
+            'title_route' => $title_route,
             'title' => $request->title,
             'thumbnail' => $request->thumbnail,
             'markdown' => $request->markdown,
@@ -34,8 +40,10 @@ class AdminBlog extends Controller
         return redirect()->route('adminBlog');
     }
 
-    public function remove()
+    public function delete($title_route)
     {
+        DB::table('blogs')->where('title_route', $title_route)->delete();
+        return redirect()->back();
     }
 
     public function edit()

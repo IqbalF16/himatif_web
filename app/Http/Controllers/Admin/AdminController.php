@@ -13,7 +13,7 @@ class AdminController extends Controller
     }
 
     public function blog(){
-        $blogs = DB::table('blogs')->select('title', 'thumbnail', 'markdown')->get();
+        $blogs = DB::table('blogs')->select('title_route', 'title', 'thumbnail', 'markdown')->get();
         return view('admin.blog', ['blogs' => $blogs]);
     }
 
