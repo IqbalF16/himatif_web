@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
     public function index(){
-        $count = 100;
-        return view('blog', ['count' => $count]);
+        $blogs = DB::table('blogs')->select('title', 'thumbnail', 'markdown')->get();
+        return view('blog', ['blogs' => $blogs]);
     }
 }
