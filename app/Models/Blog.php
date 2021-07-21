@@ -10,7 +10,7 @@ class Blog extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'thumbnile',
+        'thumbnail',
         'markdown',
     ];
 }

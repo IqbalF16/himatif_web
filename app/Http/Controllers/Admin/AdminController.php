@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -12,8 +13,8 @@ class AdminController extends Controller
     }
 
     public function blog(){
-        $count = 100;
-        return view('admin.blog', ['count' => $count]);
+        $blogs = DB::table('blogs')->select('title', 'thumbnail', 'markdown')->get();
+        return view('admin.blog', ['blogs' => $blogs]);
     }
 
     public function event(){

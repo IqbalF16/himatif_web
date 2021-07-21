@@ -45,6 +45,9 @@
                 <div class="title">
                     <input type="text" class="form-control" name="title" id="title" aria-describedby="title"
                         placeholder="Blog Title" value="New Blog">
+                    @if ($errors->has('title'))
+                        <span class="text-danger">{{ $errors->first('title') }}</span>
+                    @endif
                 </div>
                 <button type="submit" class="btn btn-primary" name="write">Submit</button>
             </div>
