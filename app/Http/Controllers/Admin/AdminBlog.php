@@ -30,7 +30,8 @@ class AdminBlog extends Controller
 
         $date = Carbon::now();
         $date = str_replace('-', '', $date->toDateString());
-        $title_route = $date."-".$request->title;
+        $title_route = $date."-".
+        $request->title;
         Blog::create([
             'title_route' => $title_route,
             'title' => $request->title,
