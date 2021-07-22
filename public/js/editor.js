@@ -13,6 +13,7 @@ $(document).ready(function () {
         $('#preview').html(markdown);
     });
 
+    $('#thumbnail-preview').attr('src', $('#thumbnail').val());
     $('#thumbnail').on('change', function (){
         $('#thumbnail-preview').attr('src', $('#thumbnail').val());
     });

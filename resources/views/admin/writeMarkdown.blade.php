@@ -1,9 +1,6 @@
-@extends('layouts.adminWrite')
+@extends('layouts.adminMarkdown')
 @section('content')
     <div class="container">
-        <div>
-
-        </div>
         <label for="thumbnail">Thumbnail: </label>
         <input type="text" name="thumbnail" id="thumbnail" placeholder="Link to Image" required>
         <img src="{{ asset('storage/images/preview.png') }}" width="auto" height="50vh" id="thumbnail-preview" required>

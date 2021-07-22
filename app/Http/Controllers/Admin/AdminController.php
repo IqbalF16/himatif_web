@@ -18,12 +18,12 @@ class AdminController extends Controller
     }
 
     public function event(){
-        $count = 100;
-        return view('admin.event', ['count' => $count]);
+        $events = DB::table('events')->select('title_route', 'title', 'thumbnail', 'markdown')->get();
+        return view('admin.event', ['events' => $events]);
     }
 
     public function form(){
-        $count = 100;
-        return view('admin.form', ['count' => $count]);
+        // $forms = DB::table('forms')->select('title_route', 'title', 'thumbnail', 'markdown')->get();
+        // return view('admin.form', ['forms' => $forms]);
     }
 }

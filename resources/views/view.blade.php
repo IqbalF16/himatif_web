@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            @foreach ($blogs as $blog)
+            @foreach ($posts as $post)
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h1>{{ $blog->title }}</h1>
+                            <h1>{{ $post->title }}</h1>
                         </div>
 
                         <div class="card-body">
@@ -16,7 +16,7 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-                            <textarea name="raw" id="raw" hidden>{{ $blog->markdown }}</textarea>
+                            <textarea name="raw" id="raw" hidden>{{ $post->markdown }}</textarea>
 
                             <div id="editor_container" style="display: none;">
                                 <textarea id="editable"></textarea>

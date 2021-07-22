@@ -13,7 +13,7 @@ class AdminBlog extends Controller
 {
     public function index()
     {
-        return view("admin.writeBlog");
+        return view("admin.writeMarkdown");
     }
 
     public function add(Request $request)
@@ -29,7 +29,7 @@ class AdminBlog extends Controller
         ]);
 
         $date = Carbon::now();
-        $date = str_replace('-', '', $date->toDateString());
+        $date = str_replace('-', '', $date->toDateString()).str_replace(':', '', $date->toTimeString());
         $title_route = $date."-".
         $request->title;
         Blog::create([
@@ -47,7 +47,18 @@ class AdminBlog extends Controller
         return redirect()->back();
     }
 
-    public function edit()
+    public function edit($title_route)
     {
+        $posts = DB::table('blogs')->where('title_route', $title_route)->select('title_route', 'title', 'thumbnail', 'markdown')->get();
+        return view('admin.editMarkdown', ['posts' => $posts]);
+    }
+
+    public function update(Request $request){
+        $update = Blog::where('title_route', $request->title_route)->update([
+            'title' => $request->title,
+            'thumbnail' => $request->thumbnail,
+            'markdown' => $request->markdown,
+        ]);
+        return redirect()->route('adminBlog');
     }
 }
