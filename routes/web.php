@@ -38,7 +38,6 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/blog/view/{route_title}', [BlogController::class, 'view'])->name('viewBlog');
 Route::get('/event', [EventController::class, 'index'])->name('event');
-Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function () {
     Route::get('/admin', function(){

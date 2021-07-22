@@ -41,9 +41,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'home' ? ' active' : '' }}" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'blog' ? ' active' : '' }}" href="/blog">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'event' ? ' active' : '' }}" href="/event">Event</a></li>
-                        <li class="nav-item"><a class="nav-link{{ Route::currentRouteName() == 'about' ? ' active' : '' }}" href="/about">About</a></li>
+                        <li class="nav-item"><a class="nav-link{{ strpos(url()->current(), '/blog/') ? ' active' : '' }}" href="/blog">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link{{ strpos(url()->current(), '/event/') ? ' active' : '' }}" href="/event">Event</a></li>
+                        <li class="nav-item"><a class="nav-link{{ strpos(url()->current(), '/about/') ? ' active' : '' }}" href="/about">About</a></li>
                         @role('admin')
                         <li class="nav-item"><a class="nav-link{{ strpos(url()->current(), '/admin/') ? ' active' : '' }}" href="/admin">Admin Page</a></li>
                         @endrole

@@ -14,7 +14,5 @@
         @if ($errors->has('markdown'))
             <span class="text-danger">{{ $errors->first('markdown') }}</span>
         @endif
-        <a name="btn-preview" id="btn-preview" class="btn btn-primary" href="#" role="button">asd</a>
-        <div id="preview">asdasd</div>
     </div>
 @endsection
