@@ -48,6 +48,16 @@ class AdminEvent extends Controller
 
     public function edit($title_route)
     {
-        dd($title_route);
+        $posts = DB::table('events')->where('title_route', $title_route)->select('title_route', 'title', 'thumbnail', 'markdown')->get();
+        return view('admin.editMarkdown', ['posts' => $posts]);
+    }
+
+    public function update(Request $request){
+        $update = Event::where('title_route', $request->title_route)->update([
+            'title' => $request->title,
+            'thumbnail' => $request->thumbnail,
+            'markdown' => $request->markdown,
+        ]);
+        return redirect()->route('adminEvent');
     }
 }

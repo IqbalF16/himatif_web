@@ -13,9 +13,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/editor.js') }}" defer></script>
+    @if (strpos(url()->current(), '/blog/write') || strpos(url()->current(), '/event/write'))
+        <script src="{{ asset('js/editor.js') }}" defer></script>
+    @endif
+    @if (strpos(url()->current(), '/form/write'))
+        <script src="{{ asset('js/form-editor.js') }}"></script>
+    @endif
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

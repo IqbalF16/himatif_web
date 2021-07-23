@@ -2,20 +2,24 @@
 @section('admin-content')
 <h5 class="card-title border-bottom">Form</h5>
 <a class="btn btn-success w-100" href="{{ route('writeForm') }}">Tambah Form</a>
-@for($i = 0; $i<=$count; $i++)
-<div class="row my-2">
-    <div class="col-9">
-        <div class="card">
-            <div class="card-body">
-                Title {{ $i+1 }}
-            </div>
-        </div>
-    </div>
-    <div class="col align-self-center text-center">
-        <button type="button" class="btn btn-success icon-control"><i class="fa fa-eye"></i></button>
-        <button type="button" class="btn btn-primary icon-control"><i class="fa fa-edit"></i></button>
-        <button type="button" class="btn btn-danger icon-control"><i class="fa fa-trash"></i></button>
-    </div>
-</div>
-@endfor
+<table class="table table-sm table-bordered">
+    <col style="width: 80%;">
+    <col>
+    <col>
+    <tbody>
+        @foreach ($forms as $form)
+            <tr>
+                <td scope="row" class="align-middle">
+                    <a href="{{ route('viewBlog', ['route_title' => $form->title_route]) }}" class="btn w-100 text-left">
+                        {{ (Str::length($form->title) >= 75) ? substr($form->title,0, 75)."..." : substr($form->title,0, 75) }}
+                    </a>
+                </td>
+                <td class="align-middle"><a name="edit" id="edit" class="btn btn-primary col h-100" href="{{ route('editBlog', $form->title_route) }}"
+                        role="button"><i class="fa fa-edit"></i></a></td>
+                <td class="align-middle"><a name="delete" id="delete" class="btn btn-danger col" href="{{ route('deleteBlog', $form->title_route) }}"
+                        role="button"><i class="fa fa-trash"></i></a></td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection

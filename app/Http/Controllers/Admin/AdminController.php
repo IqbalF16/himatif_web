@@ -23,7 +23,7 @@ class AdminController extends Controller
     }
 
     public function form(){
-        // $forms = DB::table('forms')->select('title_route', 'title', 'thumbnail', 'markdown')->get();
-        // return view('admin.form', ['forms' => $forms]);
+        $forms = DB::table('events')->select('title_route', 'title', 'thumbnail', 'markdown')->get();
+        return view('admin.form', ['forms' => $forms]);
     }
 }
