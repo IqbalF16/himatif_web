@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Form;
 use Carbon\Carbon;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 
 class AdminForm extends Controller
@@ -23,17 +25,34 @@ class AdminForm extends Controller
 
     public function add(Request $request)
     {
-        $date = Carbon::now();
-        $date = str_replace('-', '', $date->toDateString()) . str_replace(':', '', $date->toTimeString());
-        $title_route = $date . "-" . $request->title;
-        Form::create([
-            'title_route' => $title_route,
-            'title' => $request->title,
-            'form_in_json' => $request->data,
-        ]);
-        $table_title = preg_replace("![^a-z0-9]+!i", "-", $request->title);
+        dd(json_decode($request->data));
+        // echo( json_decode($request->data)[0]->label);
+        // echo count(json_decode($request->data));
+        $i = 0;
+        foreach (json_decode($request->data) as $data) {
+            echo $data->type."\n";
+        }
 
-        return redirect()->route('adminForm');
+        $data_full = json_decode($request->data);
+        // $data_inputable =
+
+        // $date = Carbon::now();
+        // $date = str_replace('-', '', $date->toDateString()) . str_replace(':', '', $date->toTimeString());
+        // $title_route = $date . "-" . $request->title;
+        // Form::create([
+        //     'title_route' => $title_route,
+        //     'title' => $request->title,
+        //     'form_in_json' => $request->data,
+        // ]);
+        // $table_title = preg_replace("![^a-z0-9]+!i", "-", $request->title);
+
+
+        // Schema::connection('mysql')->create($table_title, function (Blueprint $table) {
+        //     $table->bigIncrements('id');
+        //     // $table->
+        //     $table->timestamps();
+        // });
+        // return redirect()->route('adminForm');
     }
 
     public function delete($title_route)
