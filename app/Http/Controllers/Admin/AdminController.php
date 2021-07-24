@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Form;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,7 @@ class AdminController extends Controller
     }
 
     public function form(){
-        $forms = DB::table('events')->select('title_route', 'title', 'thumbnail', 'markdown')->get();
+        $forms = Form::select('title_route', 'title', 'form_in_json')->get();
         return view('admin.form', ['forms' => $forms]);
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Form;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class AdminForm extends Controller
 {
@@ -15,33 +16,29 @@ class AdminForm extends Controller
         return view("admin.writeForm");
     }
 
+    public function save(Request $request)
+    {
+        // $data = $request->session()->put('json_data',$request->json_data);
+    }
+
     public function add(Request $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|unique:events',
-            'thumbnail' => 'required',
-            'markdown' => 'required'
-        ], [
-            'title.required|unique:events' => 'Title harus berbeda dengan post yang sudah pernah dibuat.',
-            'thumbnail.required' => 'Thumbnail is required',
-            'makrdown.required' => 'Markdown is required',
-        ]);
-
         $date = Carbon::now();
         $date = str_replace('-', '', $date->toDateString()) . str_replace(':', '', $date->toTimeString());
         $title_route = $date . "-" . $request->title;
         Form::create([
             'title_route' => $title_route,
             'title' => $request->title,
-            'thumbnail' => $request->thumbnail,
-            'markdown' => $request->markdown,
+            'form_in_json' => $request->data,
         ]);
-        return redirect()->route('adminEvent');
+        $table_title = preg_replace("![^a-z0-9]+!i", "-", $request->title);
+
+        return redirect()->route('adminForm');
     }
 
     public function delete($title_route)
     {
-        DB::table('events')->where('title_route', $title_route)->delete();
+        DB::table('forms')->where('title_route', $title_route)->delete();
         return redirect()->back();
     }
 

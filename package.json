@@ -24,6 +24,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "formBuilder": "^3.7.3",
         "simplemde": "^1.11.2"
     }
 }

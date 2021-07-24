@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Form extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'title_route',
+        'title',
+        'form_in_json',
+    ];
 }

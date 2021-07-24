@@ -62,7 +62,8 @@ Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function 
     Route::post('/admin/event/update', [AdminEvent::class, 'update'])->name('updateEvent');
 
     Route::get('/admin/form/write', [AdminForm::class, 'index'])->name('writeForm');
-    Route::get('/admin/form/add', [AdminForm::class, 'add'])->name('addForm');
+    Route::post('/admin/form/save', [AdminForm::class, 'save'])->name('saveForm');
+    Route::post('/admin/form/add', [AdminForm::class, 'add'])->name('addForm');
     Route::get('/admin/form/delete/{title_route}', [AdminForm::class, 'delete'])->name('deleteForm');
     Route::get('/admin/form/edit/{title_route}', [AdminForm::class, 'edit'])->name('editForm');
     Route::post('/admin/form/update', [AdminForm::class, 'update'])->name('updateForm');
