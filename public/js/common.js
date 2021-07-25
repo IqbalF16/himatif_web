@@ -1,16 +1,11 @@
-// $(document).ready(function () {
-    function myFunction(url) {
-        var copyText = url;
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        document.execCommand("copy");
+$(document).ready(function(){
+    $('#copy').on("click", function(){
+        value = $(this).data('clipboard-text'); //Upto this I am getting value
 
-        // var tooltip = document.getElementById("myTooltip");
-        tooltip.innerHTML = "Copied: " + copyText.value;
-    }
-
-    // function outFunc() {
-        // var tooltip = document.getElementById("myTooltip");
-        // tooltip.innerHTML = "Copy to clipboard";
-    // }
-// });
+        var $temp = $("<input>");
+          $("body").append($temp);
+          $temp.val(value).select();
+          document.execCommand("copy");
+          $temp.remove();
+    })
+})

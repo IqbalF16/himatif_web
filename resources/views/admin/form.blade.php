@@ -16,7 +16,7 @@
                             {{ Str::length($form->title) >= 75 ? substr($form->title, 0, 75) . '...' : substr($form->title, 0, 75) }}
                         </a>
                     </td>
-                    <td class="align-middle"><button name="copy" id="copy" onclick="myFunction('{{ $request->server('SERVER_NAME').'/'.$form->link }}')" class="btn btn-light col h-100" role="button"><i
+                    <td class="align-middle"><button name="copy" id="copy" data-clipboard-text="{{ $request->server('SERVER_NAME').'/'.$form->link }}" class="btn btn-light col h-100 copy" role="button"><i
                                 class="fa fa-clipboard" aria-hidden="true" onclick="copy({{ $request->server('SERVER_NAME').'/'.$form->link }})"></i></button></td>
                     <td class="align-middle"><a name="edit" id="edit" class="btn btn-primary col h-100"
                             href="{{ route('editBlog', $form->title_route) }}" role="button"><i
@@ -28,5 +28,4 @@
             @endforeach
         </tbody>
     </table>
-    <script src="{{ asset('js/common.js') }}"></script>
 @endsection
