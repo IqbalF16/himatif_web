@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Session;
 
 class AdminForm extends Controller
 {
+
+    static $data_full;
+    static $data_type;
+    static $data_name;
+
     public function index()
     {
         return view("admin.writeForm");
@@ -25,34 +30,33 @@ class AdminForm extends Controller
 
     public function add(Request $request)
     {
-        dd(json_decode($request->data));
-        // echo( json_decode($request->data)[0]->label);
-        // echo count(json_decode($request->data));
-        $i = 0;
-        foreach (json_decode($request->data) as $data) {
-            echo $data->type."\n";
-        }
+        AdminForm::$data_full = json_decode($request->data);
+        AdminForm::$data_name = AdminForm::getNameData(AdminForm::$data_full);
+        AdminForm::$data_type = AdminForm::getTypeData(AdminForm::$data_full);
 
-        $data_full = json_decode($request->data);
-        // $data_inputable =
-
-        // $date = Carbon::now();
-        // $date = str_replace('-', '', $date->toDateString()) . str_replace(':', '', $date->toTimeString());
-        // $title_route = $date . "-" . $request->title;
-        // Form::create([
-        //     'title_route' => $title_route,
-        //     'title' => $request->title,
-        //     'form_in_json' => $request->data,
-        // ]);
-        // $table_title = preg_replace("![^a-z0-9]+!i", "-", $request->title);
+        $date = Carbon::now();
+        $date = str_replace('-', '', $date->toDateString()) . str_replace(':', '', $date->toTimeString());
+        $title_route = $date . "-" . $request->title;
+        Form::create([
+            'title_route' => $title_route,
+            'title' => $request->title,
+            'form_in_json' => $request->data,
+        ]);
+        $table_title = preg_replace("![^a-z0-9]+!i", "-", $request->title);
 
 
-        // Schema::connection('mysql')->create($table_title, function (Blueprint $table) {
-        //     $table->bigIncrements('id');
-        //     // $table->
-        //     $table->timestamps();
-        // });
-        // return redirect()->route('adminForm');
+        Schema::connection('mysql')->create($table_title, function (Blueprint $table) {
+            $table->bigIncrements('id');
+            for ($i=0; $i < count(AdminForm::$data_type); $i++) {
+                if (in_array('textarea', AdminForm::$data_type)) {
+                    $table->longText(AdminForm::$data_name[$i]);
+                }else{
+                    $table->string(AdminForm::$data_name[$i]);
+                }
+            }
+            $table->timestamps();
+        });
+        return redirect()->route('adminForm');
     }
 
     public function delete($title_route)
@@ -75,5 +79,39 @@ class AdminForm extends Controller
             'markdown' => $request->markdown,
         ]);
         return redirect()->route('adminForm');
+    }
+
+    static function getNameData($json_data)
+    {
+        $result_data = array();
+        foreach ($json_data as $data) {
+            if ($data->type == 'header') continue;
+            if ($data->type == 'paragraph') continue;
+            array_push($result_data, $data);
+        }
+
+        $array_new = array();
+        for ($i = 0; $i < count($result_data); $i++) {
+            $array_new[$i] = $result_data[$i]->name;
+        }
+
+        return $array_new;
+    }
+
+    static function getTypeData($json_data)
+    {
+        $result_data = array();
+        foreach ($json_data as $data) {
+            if ($data->type == 'header') continue;
+            if ($data->type == 'paragraph') continue;
+            array_push($result_data, $data);
+        }
+
+        $array_new = array();
+        for ($i = 0; $i < count($result_data); $i++) {
+            $array_new[$i] = $result_data[$i]->type;
+        }
+
+        return $array_new;
     }
 }
