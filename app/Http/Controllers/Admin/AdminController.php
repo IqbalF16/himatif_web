@@ -23,8 +23,8 @@ class AdminController extends Controller
         return view('admin.event', ['events' => $events]);
     }
 
-    public function form(){
-        $forms = Form::select('title_route', 'title', 'form_in_json')->get();
-        return view('admin.form', ['forms' => $forms]);
+    public function form(Request $request){
+        $forms = Form::select('title_route', 'title', 'link', 'form_in_json')->get();
+        return view('admin.form', ['forms' => $forms, 'request' => $request]);
     }
 }

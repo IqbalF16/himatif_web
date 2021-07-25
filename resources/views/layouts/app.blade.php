@@ -14,7 +14,9 @@
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+
     @if ( strpos(url()->current(), '/view') )
         <script src="{{ asset('js/view.js') }}" defer></script>
     @endif

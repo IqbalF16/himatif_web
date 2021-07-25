@@ -10,6 +10,8 @@ class Form extends Model
     protected $fillable = [
         'title_route',
         'title',
+        'table_title',
+        'link',
         'form_in_json',
     ];
 }

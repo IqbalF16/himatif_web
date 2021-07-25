@@ -17,6 +17,8 @@ class CreateFormsTable extends Migration
             $table->id();
             $table->string('title_route');
             $table->string('title');
+            $table->string('table_title');
+            $table->string('link');
             $table->longText('form_in_json');
             $table->timestamps();
         });

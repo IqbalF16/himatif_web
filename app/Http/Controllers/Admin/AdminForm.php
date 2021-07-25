@@ -37,13 +37,22 @@ class AdminForm extends Controller
         $date = Carbon::now();
         $date = str_replace('-', '', $date->toDateString()) . str_replace(':', '', $date->toTimeString());
         $title_route = $date . "-" . $request->title;
+        $table_title = preg_replace("![^a-z0-9]+!i", "-", $request->title);
+
+        $temp = $table_title;
+        $form_link = str_replace('-', '', ucwords($temp));
+
+        if (Schema::hasTable($table_title)) {
+            return redirect()->back()->withErrors(["a form with this title has been created before."]);
+        }
+
         Form::create([
             'title_route' => $title_route,
             'title' => $request->title,
-            'form_in_json' => $request->data,
+            'table_title' => strtolower($table_title),
+            'link' => $form_link,
+            'form_in_json' => "$request->data",
         ]);
-        $table_title = preg_replace("![^a-z0-9]+!i", "-", $request->title);
-
 
         Schema::connection('mysql')->create($table_title, function (Blueprint $table) {
             $table->bigIncrements('id');
