@@ -24,7 +24,7 @@ class AdminController extends Controller
     }
 
     public function form(Request $request){
-        $forms = Form::select('title_route', 'title', 'link', 'form_in_json')->get();
+        $forms = Form::select('id', 'title', 'link', 'iframe')->get();
         return view('admin.form', ['forms' => $forms, 'request' => $request]);
     }
 }

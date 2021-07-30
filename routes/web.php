@@ -38,7 +38,6 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/blog/view/{route_title}', [BlogController::class, 'view'])->name('viewBlog');
 Route::get('/event/view/{route_title}', [EventController::class, 'view'])->name('viewEvent');
-Route::get('/form/{route_title}', [EventController::class, 'view'])->name('formEvent');
 
 Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function () {
     Route::get('/admin', function(){
@@ -64,11 +63,13 @@ Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function 
     Route::get('/admin/form/write', [AdminForm::class, 'index'])->name('writeForm');
     Route::post('/admin/form/save', [AdminForm::class, 'save'])->name('saveForm');
     Route::post('/admin/form/add', [AdminForm::class, 'add'])->name('addForm');
-    Route::get('/admin/form/delete/{title_route}', [AdminForm::class, 'delete'])->name('deleteForm');
-    Route::get('/admin/form/edit/{title_route}', [AdminForm::class, 'edit'])->name('editForm');
-    Route::post('/admin/form/update', [AdminForm::class, 'update'])->name('updateForm');
+    Route::get('/admin/form/delete/{id}', [AdminForm::class, 'delete'])->name('deleteForm');
+    Route::post('/admin/form/edit/{id}', [AdminForm::class, 'edit'])->name('editForm');
+    Route::post('/admin/form/update/{id}', [AdminForm::class, 'update'])->name('updateForm');
 });
 
 Route::get('/redirect-to-previous-url', function(){
     return redirect()->route('home');
 })->name("back");
+
+Route::get('/form/{link}', [FormController::class, 'index']);

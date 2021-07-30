@@ -30,62 +30,28 @@ class AdminForm extends Controller
 
     public function add(Request $request)
     {
-        AdminForm::$data_full = json_decode($request->data);
-        AdminForm::$data_name = AdminForm::getNameData(AdminForm::$data_full);
-        AdminForm::$data_type = AdminForm::getTypeData(AdminForm::$data_full);
-
-        $date = Carbon::now();
-        $date = str_replace('-', '', $date->toDateString()) . str_replace(':', '', $date->toTimeString());
-        $title_route = $date . "-" . $request->title;
-        $table_title = preg_replace("![^a-z0-9]+!i", "-", $request->title);
-
-        $temp = $table_title;
-        $form_link = str_replace('-', '', ucwords($temp));
-
-        if (Schema::hasTable($table_title)) {
-            return redirect()->back()->withErrors(["a form with this title has been created before."]);
-        }
-
-        Form::create([
-            'title_route' => $title_route,
+        $form = Form::create([
             'title' => $request->title,
-            'table_title' => strtolower($table_title),
-            'link' => $form_link,
-            'form_in_json' => "$request->data",
+            'link' => $request->link,
+            'iframe' => $request->iframe,
         ]);
 
-        Schema::connection('mysql')->create($table_title, function (Blueprint $table) {
-            $table->bigIncrements('id');
-            for ($i=0; $i < count(AdminForm::$data_type); $i++) {
-                if (in_array('textarea', AdminForm::$data_type)) {
-                    $table->longText(AdminForm::$data_name[$i]);
-                }else{
-                    $table->string(AdminForm::$data_name[$i]);
-                }
-            }
-            $table->timestamps();
-        });
-        return redirect()->route('adminForm');
-    }
-
-    public function delete($title_route)
-    {
-        DB::table('forms')->where('title_route', $title_route)->delete();
         return redirect()->back();
     }
 
-    public function edit($title_route)
+    public function delete($id)
     {
-        $posts = DB::table('events')->where('title_route', $title_route)->select('title_route', 'title', 'thumbnail', 'markdown')->get();
-        return view('admin.editMarkdown', ['posts' => $posts]);
+        DB::table('forms')->where('id', $id)->delete();
+        return redirect()->back();
     }
 
-    public function update(Request $request)
+    public function edit(Request $request, $id)
     {
-        $update = Form::where('title_route', $request->title_route)->update([
-            'title' => $request->title,
-            'thumbnail' => $request->thumbnail,
-            'markdown' => $request->markdown,
+        // dd($request, $id);
+        $update = Form::where('id', $id)->update([
+            'title' => $request->title_edit,
+            'link' => $request->link_edit,
+            'iframe' => $request->iframe_edit,
         ]);
         return redirect()->route('adminForm');
     }
