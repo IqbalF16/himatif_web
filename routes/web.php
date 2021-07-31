@@ -29,9 +29,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // for auth on routes
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('verified');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/event', [EventController::class, 'index'])->name('event');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
@@ -40,7 +40,7 @@ Route::get('/blog/view/{route_title}', [BlogController::class, 'view'])->name('v
 Route::get('/event/view/{route_title}', [EventController::class, 'view'])->name('viewEvent');
 
 Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function () {
-    Route::get('/admin', function(){
+    Route::get('/admin', function () {
         return redirect()->route('adminSummary');
     })->name('adminDashboard');
     Route::get('/admin/summary', [AdminController::class, 'index'])->name('adminSummary');
@@ -67,9 +67,5 @@ Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function 
     Route::post('/admin/form/edit/{id}', [AdminForm::class, 'edit'])->name('editForm');
     Route::post('/admin/form/update/{id}', [AdminForm::class, 'update'])->name('updateForm');
 });
-
-Route::get('/redirect-to-previous-url', function(){
-    return redirect()->route('home');
-})->name("back");
 
 Route::get('/form/{link}', [FormController::class, 'index']);
