@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 // for auth on routes
 Auth::routes(['verify' => true]);
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/event', [EventController::class, 'index'])->name('event');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
