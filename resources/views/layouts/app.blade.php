@@ -32,7 +32,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -88,8 +88,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -107,6 +108,37 @@
         <main>
             @yield('content')
         </main>
+        <footer class="text-center text-white" style="background-color: rgba(0, 0, 0, 0.2); ">
+            <!-- Copyright -->
+            <div class="p-3 text-dark navbar">
+                <div class="">
+                    <!-- Youtube -->
+                    <a class="btn btn-primary btn-floating m-1" style="background-color: #ff0000;"
+                        href="https://www.youtube.com/c/HimatifUMG" role="button"><i class="fa fa-youtube-play"></i>
+                        Himatif UMG</a>
+
+                    <!-- Google -->
+                    <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39;"
+                        href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSHwrwzFlLwsBNlRTLJJxGqWVvZBcjLZClLdtSCSLJdxhZvFCjZVZSgRvLNlvrXShSsrTbKr"
+                        role="button"><i class="fa fa-envelope"></i> himatifunmuh@gmail.com</a>
+
+                    <!-- Instagram -->
+                    <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac;"
+                        href="https://www.instagram.com/himatif_umg/" role="button"><i class="fa fa-instagram"></i>
+                        himatif_umg</a>
+
+                    <!-- Whatsapp -->
+                    <a class="btn btn-primary btn-floating m-1" style="background-color: #00a800;"
+                        href="https://api.whatsapp.com/send?phone=6281331122859" role="button"><i
+                            class="fa fa-whatsapp"></i> 081331122859</a>
+                </div>
+                <div class="">
+                    © 2021 Copyright:
+                    <a class="text-dark" href="https://himatifumg.com/">himatifweb.com</a>
+                </div>
+            </div>
+            <!-- Copyright -->
+        </footer>
     </div>
 </body>
 

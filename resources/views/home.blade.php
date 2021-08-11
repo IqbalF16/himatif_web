@@ -14,7 +14,7 @@
                     <img src="{{ $events[$i]->thumbnail }}" alt="{{ $events[$i]->title }}"
                         style="width: 100%; object-fit: contain">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>{{ $events[$i]->title }}</h5>
+                        <h1 class="font-weight-bold">{{ $events[$i]->title }}</h1>
                     </div>
                 </div>
             @endfor
@@ -29,51 +29,22 @@
         </a>
     </div>
     @for ($i = 0; $i < count($blogs); $i++)
-        @if ($i % 2 == '0') <div class="jumbotron jumbotron-fluid
-        text-dark m-0" style="background: linear-gradient(to left, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 70%),
-        url('{{ $blogs[$i]->thumbnail }}') no-repeat center; background-size: cover">
-        <div class="container-fluid text-left">
-        <h1 class="m-0">{{ $blogs[$i]->title }}</h1>
-        </div>
-        </div>
-    @else
-        <div class="jumbotron jumbotron-fluid
-        text-dark m-0" style="background: linear-gradient(to right, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 70%),
-        url('{{ $blogs[$i]->thumbnail }}') no-repeat center;  background-size: cover">
-        <div class="container-fluid text-right">
-        <h1 class="m-0">{{ $blogs[$i]->title }}</h1>
-        </div>
-        </div> @endif
-    @endfor
-    <div class="container-fluid">
-        {{-- <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-
-                    <!-- ini adalah penggunaan 'blade directive' untuk role -->
-                    @role('admin')
-                    Anda masuk dengan role 'admin'
-                    @endrole
-                    @role('user')
-                    Anda masuk dengan role 'user'
-                    @endrole
-                    @guest
-                    Anda belum login
-                    @endguest
+        @if ($i % 2 == '0')
+            <div class="jumbotron jumbotron-fluid
+                text-dark m-0" style="background: linear-gradient(to left, rgba(0, 0, 0, 0) 50%, rgb(255, 255, 255) 70%),
+                url('{{ $blogs[$i]->thumbnail }}') no-repeat center; background-size: cover">
+                <div class="container-fluid text-left">
+                    <h1 class="m-0">{{ $blogs[$i]->title }}</h1>
                 </div>
             </div>
-        </div>
-    </div> --}}
-        asd
-    </div>
+        @else
+            <div class="jumbotron jumbotron-fluid
+                text-dark m-0" style="background: linear-gradient(to right, rgba(0, 0, 0, 0) 50%, rgb(255, 255, 255) 70%),
+                url('{{ $blogs[$i]->thumbnail }}') no-repeat center;  background-size: cover">
+                <div class="container-fluid text-right">
+                    <h1 class="m-0">{{ $blogs[$i]->title }}</h1>
+                </div>
+            </div>
+        @endif
+    @endfor
 @endsection

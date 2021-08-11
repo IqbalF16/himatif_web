@@ -9,7 +9,7 @@ use Parsedown;
 class BlogController extends Controller
 {
     public function index(){
-        $blogs = DB::table('blogs')->select('title_route', 'title', 'thumbnail', 'markdown')->get();
+        $blogs = DB::table('blogs')->select('title_route', 'title', 'thumbnail', 'markdown')->limit(7)->get();
         return view('blog', ['blogs' => $blogs]);
     }
 
