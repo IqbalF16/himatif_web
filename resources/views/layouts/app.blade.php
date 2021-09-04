@@ -9,6 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="shortcut icon" href="https://himatifumg.com/storage/images/himatif.png">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
@@ -47,17 +49,14 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a
-                                class="nav-link{{ Route::currentRouteName() == 'home' ? ' active' : '' }}"
-                                href="/">Home</a></li>
+                                class="nav-link{{ strpos(url()->current(), '/berita') ? ' active' : '' }}"
+                                href="/berita">Berita</a></li>
                         <li class="nav-item"><a
-                                class="nav-link{{ strpos(url()->current(), '/blog') ? ' active' : '' }}"
-                                href="/blog">Blog</a></li>
+                                class="nav-link{{ strpos(url()->current(), '/programkerja') ? ' active' : '' }}"
+                                href="/programkerja">Program Kerja</a></li>
                         <li class="nav-item"><a
-                                class="nav-link{{ strpos(url()->current(), '/event') ? ' active' : '' }}"
-                                href="/event">Event</a></li>
-                        <li class="nav-item"><a
-                                class="nav-link{{ strpos(url()->current(), '/about') ? ' active' : '' }}"
-                                href="/about">About</a></li>
+                                class="nav-link{{ strpos(url()->current(), '/profil') ? ' active' : '' }}"
+                                href="/profil">Profil</a></li>
                         @role('admin')
                         <li class="nav-item"><a
                                 class="nav-link{{ strpos(url()->current(), '/admin') ? ' active' : '' }}"

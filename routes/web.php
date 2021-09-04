@@ -32,33 +32,34 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/blog', [BlogController::class, 'index'])->name('blog');
-Route::get('/event', [EventController::class, 'index'])->name('event');
-Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/berita', [BlogController::class, 'index'])->name('berita');
+Route::get('/programkerja', [EventController::class, 'index'])->name('programkerja');
+Route::get('/profil', [AboutController::class, 'index'])->name('profil');
 
-Route::get('/blog/view/{route_title}', [BlogController::class, 'view'])->name('viewBlog');
-Route::get('/event/view/{route_title}', [EventController::class, 'view'])->name('viewEvent');
+Route::get('/berita/view/{route_title}', [BlogController::class, 'view'])->name('viewBlog');
+Route::get('/programkerja/view/{route_title}', [EventController::class, 'view'])->name('viewEvent');
 
 Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function () {
     Route::get('/admin', function () {
         return redirect()->route('adminSummary');
     })->name('adminDashboard');
     Route::get('/admin/summary', [AdminController::class, 'index'])->name('adminSummary');
-    Route::get('/admin/blog', [AdminController::class, 'blog'])->name('adminBlog');
-    Route::get('/admin/event', [AdminController::class, 'event'])->name('adminEvent');
+    Route::get('/admin/berita', [AdminController::class, 'berita'])->name('adminBlog');
+    Route::get('/admin/programkerja', [AdminController::class, 'programkerja'])->name('adminEvent');
     Route::get('/admin/form', [AdminController::class, 'form'])->name('adminForm');
+    Route::get('/admin/presensi', [AdminController::class, 'form'])->name('adminPresensi');
 
-    Route::get('/admin/blog/write', [AdminBlog::class, 'index'])->name('writeBlog');
-    Route::post('/admin/blog/add', [AdminBlog::class, 'add'])->name('addBlog');
-    Route::get('/admin/blog//delete/{title_route}', [AdminBlog::class, 'delete'])->name('deleteBlog');
-    Route::get('/admin/blog/edit/{title_route}', [AdminBlog::class, 'edit'])->name('editBlog');
-    Route::post('/admin/blog/update', [AdminBlog::class, 'update'])->name('updateBlog');
+    Route::get('/admin/berita/write', [AdminBlog::class, 'index'])->name('writeBlog');
+    Route::post('/admin/berita/add', [AdminBlog::class, 'add'])->name('addBlog');
+    Route::get('/admin/berita//delete/{title_route}', [AdminBlog::class, 'delete'])->name('deleteBlog');
+    Route::get('/admin/berita/edit/{title_route}', [AdminBlog::class, 'edit'])->name('editBlog');
+    Route::post('/admin/berita/update', [AdminBlog::class, 'update'])->name('updateBlog');
 
-    Route::get('/admin/event/write', [AdminEvent::class, 'index'])->name('writeEvent');
-    Route::post('/admin/event/add', [AdminEvent::class, 'add'])->name('addEvent');
-    Route::get('/admin/event/delete/{title_route}', [AdminEvent::class, 'delete'])->name('deleteEvent');
-    Route::get('/admin/event/edit/{title_route}', [AdminEvent::class, 'edit'])->name('editEvent');
-    Route::post('/admin/event/update', [AdminEvent::class, 'update'])->name('updateEvent');
+    Route::get('/admin/programkerja/write', [AdminEvent::class, 'index'])->name('writeEvent');
+    Route::post('/admin/programkerja/add', [AdminEvent::class, 'add'])->name('addEvent');
+    Route::get('/admin/programkerja/delete/{title_route}', [AdminEvent::class, 'delete'])->name('deleteEvent');
+    Route::get('/admin/programkerja/edit/{title_route}', [AdminEvent::class, 'edit'])->name('editEvent');
+    Route::post('/admin/programkerja/update', [AdminEvent::class, 'update'])->name('updateEvent');
 
     Route::get('/admin/form/write', [AdminForm::class, 'index'])->name('writeForm');
     Route::post('/admin/form/save', [AdminForm::class, 'save'])->name('saveForm');
@@ -66,6 +67,8 @@ Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function 
     Route::get('/admin/form/delete/{id}', [AdminForm::class, 'delete'])->name('deleteForm');
     Route::post('/admin/form/edit/{id}', [AdminForm::class, 'edit'])->name('editForm');
     Route::post('/admin/form/update/{id}', [AdminForm::class, 'update'])->name('updateForm');
+
+
 });
 
 Route::get('/form/{link}', [FormController::class, 'index']);

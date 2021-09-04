@@ -7,16 +7,19 @@
             <div class="card">
                 <ul class="nav flex-column nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link{{ strpos(url()->current(), '/admin/summary') ? ' active' : '' }}" href="/admin/summary">Summary</a>
+                        <a class="nav-link{{ strpos(url()->current(), '/admin/dashboard') ? ' active' : '' }}" href="/admin/dashboard">Dasboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link{{ strpos(url()->current(), '/admin/blog') ? ' active' : '' }}" href="/admin/blog">Blog</a>
+                        <a class="nav-link{{ strpos(url()->current(), '/admin/berita') ? ' active' : '' }}" href="/admin/berita">Berita</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link{{ strpos(url()->current(), '/admin/event') ? ' active' : '' }}" href="/admin/event">Event</a>
+                        <a class="nav-link{{ strpos(url()->current(), '/admin/programkerja') ? ' active' : '' }}" href="/admin/programkerja">Program Kerja</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link{{ strpos(url()->current(), '/admin/form') ? ' active' : '' }}" href="/admin/form">Form</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{{ strpos(url()->current(), '/admin/presensi') ? ' active' : '' }}" href="/admin/presensi">Presensi</a>
                     </li>
                 </ul>
             </div>
