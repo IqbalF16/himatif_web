@@ -62,6 +62,11 @@
                                 class="nav-link{{ strpos(url()->current(), '/admin') ? ' active' : '' }}"
                                 href="/admin">Admin Page</a></li>
                         @endrole
+                        @role('user')
+                        <li class="nav-item"><a
+                                class="nav-link{{ strpos(url()->current(), '/user') ? ' active' : '' }}"
+                                href="/user">User Page</a></li>
+                        @endrole
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -133,7 +138,7 @@
                 </div>
                 <div class="">
                     © 2021 Copyright:
-                    <a class="text-dark" href="https://himatifumg.com/">himatifweb.com</a>
+                    <a class="text-dark" href="https://himatifumg.com/">himatifumg.com</a>
                 </div>
             </div>
             <!-- Copyright -->

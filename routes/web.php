@@ -39,15 +39,16 @@ Route::get('/profil', [AboutController::class, 'index'])->name('profil');
 Route::get('/berita/view/{route_title}', [BlogController::class, 'view'])->name('viewBlog');
 Route::get('/programkerja/view/{route_title}', [EventController::class, 'view'])->name('viewEvent');
 
-Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
     Route::get('/admin', function () {
         return redirect()->route('adminSummary');
     })->name('adminDashboard');
     Route::get('/admin/summary', [AdminController::class, 'index'])->name('adminSummary');
-    Route::get('/admin/berita', [AdminController::class, 'berita'])->name('adminBlog');
-    Route::get('/admin/programkerja', [AdminController::class, 'programkerja'])->name('adminEvent');
+    Route::get('/admin/berita', [AdminController::class, 'blog'])->name('adminBlog');
+    Route::get('/admin/programkerja', [AdminController::class, 'event'])->name('adminEvent');
     Route::get('/admin/form', [AdminController::class, 'form'])->name('adminForm');
     Route::get('/admin/presensi', [AdminController::class, 'form'])->name('adminPresensi');
+    Route::get('/admin/usermanagement', [AdminController::class, 'usermanagement'])->name('adminUserManagement');
 
     Route::get('/admin/berita/write', [AdminBlog::class, 'index'])->name('writeBlog');
     Route::post('/admin/berita/add', [AdminBlog::class, 'add'])->name('addBlog');
@@ -67,8 +68,12 @@ Route::group(['middleware' => ['role:admin'], 'middleware' => 'auth'], function 
     Route::get('/admin/form/delete/{id}', [AdminForm::class, 'delete'])->name('deleteForm');
     Route::post('/admin/form/edit/{id}', [AdminForm::class, 'edit'])->name('editForm');
     Route::post('/admin/form/update/{id}', [AdminForm::class, 'update'])->name('updateForm');
+});
 
-
+Route::group(['middleware' => ['auth', 'verified', 'role:user']], function (){
+    Route::get('/user', [function(){
+        return 'asd';
+    }]);
 });
 
 Route::get('/form/{link}', [FormController::class, 'index']);

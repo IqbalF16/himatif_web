@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,8 @@ class HomeController extends Controller
     public function __construct()
     {
         // uncomment code below must login for access this class
-        // $this->middleware('auth');
+        // dd(Auth::check());
+        // $this->middleware('verified');
     }
 
     /**

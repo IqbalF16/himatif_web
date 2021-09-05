@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Form;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,5 +27,11 @@ class AdminController extends Controller
     public function form(Request $request){
         $forms = Form::select('id', 'title', 'link', 'iframe')->get();
         return view('admin.form', ['forms' => $forms, 'request' => $request]);
+    }
+
+    public function usermanagement(Request $request){
+        $users = User::all();
+        dd($users);
+        return view('admin.usermanagement', ['users' => $users]);
     }
 }

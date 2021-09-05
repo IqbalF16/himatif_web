@@ -21,6 +21,9 @@
                     <li class="nav-item">
                         <a class="nav-link{{ strpos(url()->current(), '/admin/presensi') ? ' active' : '' }}" href="/admin/presensi">Presensi</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link{{ strpos(url()->current(), '/admin/usermanagement') ? ' active' : '' }}" href="/admin/usermanagement">User Management</a>
+                    </li>
                 </ul>
             </div>
         </div>
