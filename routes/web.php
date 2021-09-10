@@ -68,6 +68,9 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
     Route::get('/admin/form/delete/{id}', [AdminForm::class, 'delete'])->name('deleteForm');
     Route::post('/admin/form/edit/{id}', [AdminForm::class, 'edit'])->name('editForm');
     Route::post('/admin/form/update/{id}', [AdminForm::class, 'update'])->name('updateForm');
+
+    Route::post('admin/usermanagement/save', [AdminController::class, 'saveUserManagement'])->name('saveUserManagement');
+    Route::get('admin/usermanagement/delete/{name}', [AdminController::class, 'deleteUserManagement'])->name('deleteUserManagement');
 });
 
 Route::group(['middleware' => ['auth', 'verified', 'role:user']], function (){
