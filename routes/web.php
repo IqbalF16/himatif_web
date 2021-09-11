@@ -31,6 +31,9 @@ use Illuminate\Support\Facades\Route;
 // for auth on routes
 Auth::routes(['verify' => true]);
 
+// /response to login
+// /problem to register
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/berita', [BlogController::class, 'index'])->name('berita');
 Route::get('/programkerja', [EventController::class, 'index'])->name('programkerja');
