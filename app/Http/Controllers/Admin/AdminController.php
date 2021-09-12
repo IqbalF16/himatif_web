@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Form;
+use App\Models\Presensi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +37,8 @@ class AdminController extends Controller
 
     public function usermanagement()
     {
-        $users = User::all();
+        $users = User::where('email', '!=', 'admin@himatifumg.com')->get();
+        // dd($users);
         return view('admin.usermanagement', ['users' => $users]);
     }
 
@@ -70,5 +72,10 @@ class AdminController extends Controller
     {
         User::where('name', $name)->delete();
         return redirect()->back();
+    }
+
+    public function presensi(Request $request){
+        $presensi = Presensi::all();
+        return view('admin.presensi', ['presensi' => $presensi, 'request' => $request]);
     }
 }

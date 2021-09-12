@@ -9,6 +9,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PresensiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -50,7 +51,7 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
     Route::get('/admin/berita', [AdminController::class, 'blog'])->name('adminBlog');
     Route::get('/admin/programkerja', [AdminController::class, 'event'])->name('adminEvent');
     Route::get('/admin/form', [AdminController::class, 'form'])->name('adminForm');
-    Route::get('/admin/presensi', [AdminController::class, 'form'])->name('adminPresensi');
+    Route::get('/admin/presensi', [AdminController::class, 'presensi'])->name('adminPresensi');
     Route::get('/admin/usermanagement', [AdminController::class, 'usermanagement'])->name('adminUserManagement');
 
     Route::get('/admin/berita/write', [AdminBlog::class, 'index'])->name('writeBlog');
@@ -74,6 +75,11 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
 
     Route::post('admin/usermanagement/save', [AdminController::class, 'saveUserManagement'])->name('saveUserManagement');
     Route::get('admin/usermanagement/delete/{name}', [AdminController::class, 'deleteUserManagement'])->name('deleteUserManagement');
+
+    Route::post('/admin/presensi/add', [PresensiController::class, 'add'])->name('addPresensi');
+    Route::get('/admin/presensi/view/{link}', [PresensiController::class, 'view'])->name('viewPresensi');
+    Route::get('/admin/presensi/delete', [PresensiController::class, 'delete'])->name('deletePresensi');
+
 });
 
 Route::group(['middleware' => ['auth', 'verified', 'role:user']], function (){
@@ -83,3 +89,5 @@ Route::group(['middleware' => ['auth', 'verified', 'role:user']], function (){
 });
 
 Route::get('/form/{link}', [FormController::class, 'index']);
+Route::get('/presensi/{link}', [PresensiController::class, 'checkin'])->name('checkin');
+Route::get('/presensi/{link}/{pin}', [PresensiController::class, 'checkinauto'])->name('checkinAuto');

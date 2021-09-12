@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon as SupportCarbon;
 use Illuminate\Support\Facades\DB;
 use Parsedown;
 
@@ -28,7 +29,7 @@ class AdminBlog extends Controller
             'makrdown.required' => 'Markdown is required',
         ]);
 
-        $date = Carbon::now();
+        $date = SupportCarbon::now();
         $date = str_replace('-', '', $date->toDateString()).str_replace(':', '', $date->toTimeString());
         $title_route = $date."-".
         $request->title;

@@ -109,10 +109,10 @@
             </div>
         </nav>
 
-        <main>
+        <main class="py-3">
             @yield('content')
         </main>
-        <footer class="text-center text-white" style="background-color: rgba(0, 0, 0, 0.2); ">
+        <footer class="text-center text-white fixed-bottom" style="background-color: rgba(0, 0, 0, 0.2); ">
             <!-- Copyright -->
             <div class="p-3 text-dark navbar">
                 <div class="">
