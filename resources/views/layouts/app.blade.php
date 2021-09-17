@@ -30,6 +30,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js">
+    </script>
 </head>
 
 <body>
@@ -39,8 +44,8 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -94,11 +99,12 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                         document.getElementById('logout-form').submit();">
+                                                                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -117,9 +123,10 @@
             <div class="p-3 text-dark navbar">
                 <div class="">
                     <!-- Youtube -->
-                    <a class="btn btn-primary btn-floating m-1" style="background-color: #ff0000;"
-                        href="https://www.youtube.com/c/HimatifUMG" role="button"><i class="fa fa-youtube-play"></i>
-                        Himatif UMG</a>
+                    <a class=" btn btn-primary
+                    btn-floating m-1" style="background-color: #ff0000;" href="https://www.youtube.com/c/HimatifUMG"
+                    role="button"><i class="fa fa-youtube-play"></i>
+                    Himatif UMG</a>
 
                     <!-- Google -->
                     <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39;"
@@ -138,7 +145,8 @@
                 </div>
                 <div class="">
                     © 2021 Copyright:
-                    <a class="text-dark" href="https://himatifumg.com/">himatifumg.com</a>
+                    <a class=" text-dark"
+                    href="https://himatifumg.com/">himatifumg.com</a>
                 </div>
             </div>
             <!-- Copyright -->

@@ -78,6 +78,8 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
 
     Route::post('/admin/presensi/add', [PresensiController::class, 'add'])->name('addPresensi');
     Route::get('/admin/presensi/view/{link}', [PresensiController::class, 'view'])->name('viewPresensi');
+    Route::get('/admin/presensi/refresh', [PresensiController::class, 'refresh'])->name('refreshPresensi');
+    Route::get('/admin/presensi/toggle', [PresensiController::class, 'toggle'])->name('togglePresensi');
     Route::get('/admin/presensi/delete', [PresensiController::class, 'delete'])->name('deletePresensi');
 
 });
@@ -91,3 +93,4 @@ Route::group(['middleware' => ['auth', 'verified', 'role:user']], function (){
 Route::get('/form/{link}', [FormController::class, 'index']);
 Route::get('/presensi/{link}', [PresensiController::class, 'checkin'])->name('checkin');
 Route::get('/presensi/{link}/{pin}', [PresensiController::class, 'checkinauto'])->name('checkinAuto');
+Route::get('/presensi/postCheckin', [PresensiController::class, 'postCheckin'])->name('postCheckin');

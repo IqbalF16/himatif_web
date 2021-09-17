@@ -21,7 +21,7 @@ class PresensiController extends Controller
 
         return redirect()->route('viewPresensi', [
             'title' => $request->title,
-
+            'link' => $request->link
         ]);
     }
 
@@ -35,10 +35,40 @@ class PresensiController extends Controller
     }
 
     public function checkin($link){
-        echo "asd";
+        $presensi = Presensi::where('link', $link)->first();
+        return view('checkin',[
+            'presensi' => $presensi
+        ]);
     }
 
     public function checkinauto($link){
         echo "asd auto";
+    }
+
+    public function postCheckin($request){
+        dd($request);
+    }
+
+    public function refresh(Request $request){
+        $pin = rand(111111, 999999);
+        Presensi::where('link', $request->link)->update([
+            'pin' => $pin,
+        ]);
+
+        return $pin;
+    }
+
+    public function toggle(Request $request){
+        if ($request->toggle) {
+            Presensi::where('link', $request->link)->update([
+                'active' => 1,
+            ]);
+        } else {
+            Presensi::where('link', $request->link)->update([
+                'active' => 0,
+            ]);
+        }
+
+        return $request;
     }
 }
