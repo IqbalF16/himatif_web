@@ -18,7 +18,7 @@ class CreatePresensisTable extends Migration
             $table->string('title');
             $table->string('link');
             $table->string('pin');
-            $table->boolean('active');
+            $table->integer('active');
             $table->timestamps();
         });
     }

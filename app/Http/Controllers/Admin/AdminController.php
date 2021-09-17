@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Form;
 use App\Models\Presensi;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -74,8 +75,15 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function presensi(Request $request){
+    public function presensi(Request $request)
+    {
         $presensi = Presensi::all();
-        return view('admin.presensi', ['presensi' => $presensi, 'request' => $request]);
+        $datetime = [];
+        foreach ($presensi as $p) {
+            $temp = new Carbon($p->created_at);
+            array_push($datetime, $temp->toDateTimeString());
+        }
+        // dd($presensi, $datetime);
+        return view('admin.presensi', ['presensi' => $presensi, 'request' => $request, 'datetime' => $datetime]);
     }
 }

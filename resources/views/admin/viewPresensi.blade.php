@@ -10,10 +10,12 @@
                     <h1 class="align-middle m-0" id=" title">
                         {{ $presensi->title }}
                     </h1>
-                    <input id="presensitoggle" type="checkbox" data-toggle="switchbutton" {{ $presensi->active ? ' checked' : '' }}
-                        data-onlabel="Active" data-offlabel="Inactive" data-onstyle="success" data-offstyle="danger">
+                    <input id="presensitoggle" type="checkbox" data-toggle="switchbutton"
+                        {{ $presensi->active ? ' checked' : '' }} data-onlabel="Active" data-offlabel="Inactive"
+                        data-onstyle="success" data-offstyle="danger">
+                    <div id="datetime" class="align-self-center">{{ $datetime }}</div>
                     <div class="countdown d-inline-flex">
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" id="refresh">
                             Refresh <span id="timer" class="badge badge-light" data-countdown="120">00:02:00</span>
                         </button>
                     </div>

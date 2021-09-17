@@ -3,17 +3,20 @@
     <h5 class="card-title border-bottom">Presensi</h5>
     <a class="btn btn-success w-100 col" data-toggle="modal" data-target="#addPresensiModal">Tambah Presensi</a>
     <table class="table table-sm table-bordered">
-        <col style="width: 70%;">
+        <col style="width: 60%;">
         <col>
         <col>
         <col>
         <tbody>
-            @foreach ($presensi as $p)
+            @foreach ($presensi as $id => $p )
                 <tr id="presensi{{ $p->id }}">
                     <td scope="row" class="align-middle">
                         <a href="{{ route('viewPresensi', $p->link) }}" target="_blank" class="btn w-100 text-left">
                             {{ Str::length($p->title) >= 75 ? substr($p->title, 0, 75) . '...' : substr($p->title, 0, 75) }}
                         </a>
+                    </td>
+                    <td class="align-middle">
+                        {{ $datetime[$id] }}
                     </td>
                     <td class="align-middle"><button name="copy" id="copy"
                             data-clipboard-text="{{ $request->server('HTTP_HOST') . '/presensi/' . $p->link }}"
@@ -21,8 +24,7 @@
                                 onclick="copy({{ $request->server('HTTP_HOST') . '/presensi/' . $p->link }})"></i></button>
                     </td>
                     <td class="align-middle"><a name="delete" id="delete" class="btn btn-danger col"
-                            href="{{ route('deleteForm', $p->id) }}" role="button"><i
-                                class="fa fa-trash"></i></a></td>
+                            href="{{ route('deleteForm', $p->id) }}" role="button"><i class="fa fa-trash"></i></a></td>
                 </tr>
             @endforeach
         </tbody>
@@ -45,12 +47,12 @@
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" class="form-control" name="title" id="title" aria-describedby="helpId"
-                                placeholder="..." >
+                                placeholder="...">
                         </div>
                         <div class="form-group">
                             <label for="link">Link</label>
                             <input type="text" class="form-control" name="link" id="link" aria-describedby="helpId"
-                                placeholder="..." >
+                                placeholder="...">
                         </div>
                     </div>
                     <div class="modal-footer">

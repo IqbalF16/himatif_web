@@ -12,6 +12,10 @@ var qrcode = new QRCode("qrcode", {
 });
 
 var downloadTimer = setInterval(function () {
+    $('#refresh').on('click', function(){
+        timeleft = 0;
+    });
+
     if (timeleft == 0) {
         // clearInterval(downloadTimer);
         // document.getElementById("timer").innerHTML = time;
