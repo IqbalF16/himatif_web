@@ -6,6 +6,16 @@
     <div class="container">
         <div class="row justify-content-center" style="top: 50%;">
             <div class="col-md-7">
+                @if (Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('error') }}
+                    </div>
+                @endif
+                @if (Session::has('success'))
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
                 <div class="card" style="">
                     <div class="card-body">
                         <h5 class="card-title">{{ $presensi->title }}</h5>
@@ -14,7 +24,8 @@
                         </h6>
                         <p class="card-text">
                             @if ($presensi->active)
-                                <form action="{{ route('postCheckin') }}" method="post" class="w-100">
+                                <form action="{{ route('postCheckin') }}" method="post" class="w-100"
+                                    id="checkin">
                                     @csrf
                                     <input type="hidden" name="link" value="{{ $presensi->link }}">
                                     <div class="form-group">
@@ -22,7 +33,7 @@
                                             <div class="form-group row justify-content-center">
                                                 <label for="name">Nama</label>
                                                 <input id="name" class="form-control w-100" type="text" name="name"
-                                                    placeholder="Name">
+                                                    placeholder="Name" maxlength="30" required>
                                             </div>
                                         </div>
                                     </div>
@@ -31,7 +42,7 @@
                                             <div class="form-group row justify-content-center">
                                                 <label for="nim">NIM</label>
                                                 <input id="nim" class="form-control w-100" type="text" name="nim"
-                                                    placeholder="NIM">
+                                                    placeholder="NIM" required>
                                             </div>
                                         </div>
                                     </div>
@@ -40,12 +51,12 @@
                                             <label for="pin">Pin</label>
                                         </div>
                                         <div class="row justify-content-center">
-                                            <input id="pin" class="form-control" type="text" name="pin1">
-                                            <input id="pin" class="form-control" type="text" name="pin2">
-                                            <input id="pin" class="form-control" type="text" name="pin3">
-                                            <input id="pin" class="form-control" type="text" name="pin4">
-                                            <input id="pin" class="form-control" type="text" name="pin5">
-                                            <input id="pin" class="form-control" type="text" name="pin6">
+                                            <input id="pin" class="form-control" type="text" name="pin1" required>
+                                            <input id="pin" class="form-control" type="text" name="pin2" required>
+                                            <input id="pin" class="form-control" type="text" name="pin3" required>
+                                            <input id="pin" class="form-control" type="text" name="pin4" required>
+                                            <input id="pin" class="form-control" type="text" name="pin5" required>
+                                            <input id="pin" class="form-control" type="text" name="pin6" required>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center">
@@ -69,6 +80,7 @@
 
     </style>
     <script src="{{ asset('js/jquery.maxlength.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
     <script>
         $("[name^='pin']").attr('maxlength', '1');
         $("[name^='pin']").keyup(function() {
@@ -77,28 +89,5 @@
             }
             $(this).next().focus();
         });
-
-
-        // checkin = setInterval(function() {
-
-        //     link = $('#link').val();
-        //     $.ajax({
-        //         url: "/presensi/control",
-        //         type: "GET",
-        //         dataType: 'json',
-        //         data: {
-        //             link: link,
-        //         },
-        //         success: function(data) {
-
-        //             // This here will print the
-        //             // retrieved json on the console.
-        //             console.log(data);
-        //         },
-        //         error: function() {
-        //             console.log("Something went wrong");
-        //         },
-        //     });
-        // }, 1000);
     </script>
 @endsection

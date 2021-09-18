@@ -31,17 +31,27 @@ class PresensiController extends Controller
         ]);
     }
 
+    public function delete($link)
+    {
+        Presensi::where('link', $link)->delete();
+        if (Storage::exists($link . '.json')) {
+            Storage::delete($link . '.json');
+        }
+        return redirect()->back();
+    }
+
     public function view(Request $request, $link)
     {
         $presensi = Presensi::where('link', $link)->first();
-        // foreach ($presensi as $p) {
-            $temp = new Carbon($presensi->created_at);
-            // array_push($datetime, $temp->toDateTimeString());
-            // }
-            $datetime = $temp->toDateTimeString();
+        $temp = new Carbon($presensi->created_at);
+        $datetime = $temp->toDateTimeString();
+
+        $data = json_decode(Storage::get($link.'.json'));
+
         return view('admin.viewPresensi', [
             'presensi' => $presensi,
-            'datetime' => $datetime
+            'datetime' => $datetime,
+            'data' => $data,
         ]);
     }
 
@@ -61,23 +71,53 @@ class PresensiController extends Controller
 
     public function postCheckin(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:30',
+            'nim' => 'required',
+            'pin1' => 'required',
+            'pin2' => 'required',
+            'pin3' => 'required',
+            'pin4' => 'required',
+            'pin5' => 'required',
+            'pin6' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('error', 'Presensi tidak valid');
+        }
+
         $nama = $request->name;
         $nim = $request->nim;
         $pin = $request->pin1 . $request->pin2 . $request->pin3 . $request->pin4 . $request->pin5 . $request->pin6;
 
+        $datetime = Carbon::now()->toDateTimeString();
+
+        $presensi = Presensi::where('link', $request->link)->first();
+        if ($presensi->active == 0) {
+            return redirect()->back()->with(['error' => 'Presensi tidak aktif']);
+        }
+
+        if ($pin != $presensi->pin) {
+            return redirect()->back()->with(['error' => 'Pin sudah kedaluwarsa / tidak benar']);
+        }
+
         $data = [
             'nama' => $nama,
-            'nim' => $nim
+            'nim' => $nim,
+            'datetime' => $datetime,
         ];
-
+        // dd(json_encode($data, JSON_PRETTY_PRINT));
         $json_data = json_decode(Storage::get($request->link . '.json'));
-
+        // dd($json_data);
         array_push($json_data, $data);
+        $asd = $json_data;
+        // dd($asd, $test);
 
-        Storage::put($request->link . '.json', $json_data);
+        Storage::put($request->link . '.json', json_encode($json_data, JSON_PRETTY_PRINT));
 
-        dd($json_data);
-        return redirect()->back();
+        // dd($json_data);
+        return redirect()->back()->with(['success' => 'Presensi telah berhasil dilakukan']);
     }
 
     public function refresh(Request $request)
@@ -88,6 +128,13 @@ class PresensiController extends Controller
         ]);
 
         return $pin;
+    }
+
+    public function refreshname(Request $request)
+    {
+        $data = Storage::get($request->link.'.json');
+
+        return $data;
     }
 
     public function toggle(Request $request)

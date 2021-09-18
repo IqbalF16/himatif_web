@@ -79,8 +79,9 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
     Route::post('/admin/presensi/add', [PresensiController::class, 'add'])->name('addPresensi');
     Route::get('/admin/presensi/view/{link}', [PresensiController::class, 'view'])->name('viewPresensi');
     Route::get('/admin/presensi/refresh', [PresensiController::class, 'refresh'])->name('refreshPresensi');
+    Route::get('/admin/presensi/refreshname', [PresensiController::class, 'refreshname'])->name('refreshnamePresensi');
     Route::get('/admin/presensi/toggle', [PresensiController::class, 'toggle'])->name('togglePresensi');
-    Route::get('/admin/presensi/delete', [PresensiController::class, 'delete'])->name('deletePresensi');
+    Route::get('/admin/presensi/delete/{id}', [PresensiController::class, 'delete'])->name('deletePresensi');
     
     // Route::get('/admin/presensi/{filename}', [PresensiController::class, 'file'])->name('presensiFile');
 });

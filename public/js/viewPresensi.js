@@ -12,7 +12,7 @@ var qrcode = new QRCode("qrcode", {
 });
 
 var downloadTimer = setInterval(function () {
-    $('#refresh').on('click', function(){
+    $('#refresh').on('click', function () {
         timeleft = 0;
     });
 
@@ -51,6 +51,39 @@ var downloadTimer = setInterval(function () {
     timeleft -= 1;
 }, 1000);
 
+// timer = $('#isi').data('countdown');
+console.log('refreshname');
+var timecounter = setInterval(function () {
+    let temp = time % 2;
+    console.log(temp, time);
+    if (temp == 0) {
+        link = $('#link').val();
+        $.ajax({
+            url: "/admin/presensi/refreshname",
+            type: "GET",
+            dataType: 'json',
+            data: {
+                link: link,
+            },
+            success: function (data) {
+                // console.log(data);
+                list = "";
+                data.forEach(element => {
+                    list += "<div class='btn btn-dark mx-2 my-1 col-lg-3'>" + element['nama'] + "</div>";
+                    $('#presensidata').html(list);
+                    // console.log(list);
+                });
+            },
+            error: function () {
+                console.log("Something went wrong");
+            },
+        });
+        document.getElementById("isi").innerHTML = toTimeFormat(time);
+    } else {
+        document.getElementById("isi").innerHTML = toTimeFormat(time);
+    }
+    time -= 1;
+}, 1000);
 
 $('#presensitoggle').on('change', function () {
     console.log($(this).prop('checked'));

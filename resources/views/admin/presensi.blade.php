@@ -24,7 +24,7 @@
                                 onclick="copy({{ $request->server('HTTP_HOST') . '/presensi/' . $p->link }})"></i></button>
                     </td>
                     <td class="align-middle"><a name="delete" id="delete" class="btn btn-danger col"
-                            href="{{ route('deleteForm', $p->id) }}" role="button"><i class="fa fa-trash"></i></a></td>
+                            href="{{ route('deletePresensi', $p->link) }}" role="button"><i class="fa fa-trash"></i></a></td>
                 </tr>
             @endforeach
         </tbody>
