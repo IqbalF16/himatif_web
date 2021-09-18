@@ -1,5 +1,4 @@
-var timeleft = $('#timer').data('countdown');
-time = timeleft;
+timeleft = $('#timer').data('countdown');
 console.log(timeleft);
 
 var qrcode = new QRCode("qrcode", {
@@ -17,9 +16,7 @@ var downloadTimer = setInterval(function () {
     });
 
     if (timeleft == 0) {
-        // clearInterval(downloadTimer);
-        // document.getElementById("timer").innerHTML = time;
-        timeleft = time;
+        timeleft = $('#timer').data('countdown');
         link = $('#link').val();
         $.ajax({
             url: "/admin/presensi/refresh",

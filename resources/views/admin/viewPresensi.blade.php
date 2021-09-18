@@ -3,7 +3,7 @@
 @section('content')
     @csrf
     <input type="hidden" name="link" id="link" value="{{ $presensi->link }}">
-    <div id="isi" class="d-none" data-countdown="1"></div>
+    <div id="isi" class="d-none"></div>
     <div class="container">
         <div class="container row justify-content-between mb-3">
             <h1 class="align-middle m-0" id=" title">
@@ -15,7 +15,7 @@
             <div id="datetime" class="align-self-center">{{ $datetime }}</div>
             <div class="countdown d-inline-flex">
                 <button type="button" class="btn btn-primary" id="refresh">
-                    Refresh <span id="timer" class="badge badge-light" data-countdown="120">00:02:00</span>
+                    Refresh <span id="timer" class="badge badge-light" data-countdown="60">00:01:00</span>
                 </button>
             </div>
         </div>
@@ -41,7 +41,7 @@
                         </td>
                         <td class="" style=" overflow-y: scroll; overflow-x: hidden; height: 50vh; width: 75vw;; position: fixed;">
                             <div class="row justify-content-around" id="presensidata">
-                                @foreach ($data as $id => $d)
+                                @foreach ($data as $d)
                                     <div class="btn btn-dark mx-2 my-1 col-lg-3">
                                         {{ $d->nama }}
                                     </div>
