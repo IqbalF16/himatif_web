@@ -23,7 +23,7 @@ class PresensiController extends Controller
 
         $json_data = Storage::disk('local')->exists($request->link . '.json') ? json_decode(Storage::disk('local')->get($request->link . '.json')) : [];
         // dd($json_data);
-        Storage::disk('local')->put($request->link . '.json', json_encode($request));
+        Storage::disk('local')->put($request->link . '.json', "[]");
 
         return redirect()->route('viewPresensi', [
             'title' => $request->title,

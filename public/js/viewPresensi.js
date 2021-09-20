@@ -14,7 +14,7 @@ var downloadTimer = setInterval(function () {
     $('#refresh').on('click', function () {
         timeleft = 0;
     });
-
+    console.log(timeleft);
     if (timeleft == 0) {
         timeleft = $('#timer').data('countdown');
         link = $('#link').val();
@@ -43,16 +43,10 @@ var downloadTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = toTimeFormat(timeleft);
     } else {
         document.getElementById("timer").innerHTML = toTimeFormat(timeleft);
-
     }
-    timeleft -= 1;
-}, 1000);
 
-// timer = $('#isi').data('countdown');
-console.log('refreshname');
-var timecounter = setInterval(function () {
-    let temp = time % 2;
-    console.log(temp, time);
+    let temp = timeleft % 2;
+    // console.log(temp, timeleft);
     if (temp == 0) {
         link = $('#link').val();
         $.ajax({
@@ -75,11 +69,11 @@ var timecounter = setInterval(function () {
                 console.log("Something went wrong");
             },
         });
-        document.getElementById("isi").innerHTML = toTimeFormat(time);
+        document.getElementById("isi").innerHTML = toTimeFormat(timeleft);
     } else {
-        document.getElementById("isi").innerHTML = toTimeFormat(time);
+        document.getElementById("isi").innerHTML = toTimeFormat(timeleft);
     }
-    time -= 1;
+    timeleft -= 1;
 }, 1000);
 
 $('#presensitoggle').on('change', function () {
