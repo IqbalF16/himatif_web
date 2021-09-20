@@ -40,12 +40,21 @@
                             <h4 id="pin">{{ $presensi->pin }}</h4>
                             <div class="border border-dark" style="overflow-y: scroll; height: 20vh;">
                                 <button class="btn btn-dark mb-1" type="button" data-file="json">Download as JSON</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="xlsx">Download as xlsx</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="csv">Download as csv</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="csv">Download as CSV</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="doc">Download as DOC</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="pdf">Download as PDF</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="png">Download as PNG</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="sql">Download as SQL</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="tsv">Download as TSV</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="txt">Download as TXT</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="xls">Download as XLS</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="xlsx">Download as XLSX</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="xml">Download as XML</button>
                             </div>
                         </td>
                         <td class="" style=" overflow-y: scroll; overflow-x: hidden; height: 50vh; width: 75vw;;
                             position: fixed;">
+                            <div id="datapresensi">
                             <table class="table table-light table-hover table-striped">
                                 <thead class="thead-dark">
                                     <tr>
@@ -75,12 +84,21 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <script src="{{ asset('js/xlsx.core.min.js') }}"></script>
+    <script src="{{ asset('js/FileSaver.js') }}"></script>
+    <script src="{{ asset('js/jspdf.umd.min.js') }}"></script>
+    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/es6-promise.auto.min.js') }}"></script>
+    <script src="{{ asset('js/html2canvas.min.js') }}"></script>
+    <script src="{{ asset('js/tableExport.min.js') }}"></script>
     <script src="{{ asset('js/qrcode.js') }}"></script>
     <script src="{{ asset('js/viewPresensi.js') }}"></script>
     <style>

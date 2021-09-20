@@ -142,44 +142,13 @@ $("[id^='delete']").on('click', function () {
 $("[data-file]").on('click', function () {
     file = $(this).data('file');
     console.log(file);
-    download(file);
+    downloaddata(link, file);
 });
 
-function download(file) {
-    $.ajax({
-        url: "/admin/presensi/download",
-        type: "GET",
-        dataType: 'json',
-        data: {
-            file: file,
-            link: link,
-        },
-        success: function (data) {
-
-            // This here will print the
-            // retrieved json on the console.
-            console.log(data);
-
-            json_data = JSON.stringify(data, null, "\t");
-            console.log(json_data);
-            blob = new Blob([json_data], { type: "application/octetstream"});
-            isIE = false || !!document.documentMode;
-
-            if (isIE) {
-                window.navigator.msSaveBlob(blob, link+"."+file);
-            } else {
-                var url = window.URL || window.webkitURL;
-                downloadLink = url.createObjectURL(blob);
-                var a = $("<a />");
-                a.attr("download", link+"."+file);
-                a.attr("href", downloadLink);
-                $("body").append(a);
-                a[0].click();
-                $("body").remove(a);
-            }
-        },
-        error: function (ts) {
-            console.log("error " + ts.status + " " + ts.statusText);
-        },
+function downloaddata(link, file) {
+    $('#datapresensi').tableExport({
+        fileName: link,
+        type: file,
+        ignoreColumn: [3]
     });
 }
