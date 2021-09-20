@@ -40,6 +40,13 @@ class PresensiController extends Controller
         return redirect()->back();
     }
 
+    public function deleteData(Request $request)
+    {
+        $data = json_decode(Storage::get($request->link.".json"));
+        unset($data[$request->id]);
+        return json_encode($data, JSON_PRETTY_PRINT);
+    }
+
     public function view(Request $request, $link)
     {
         $presensi = Presensi::where('link', $link)->first();
@@ -155,14 +162,10 @@ class PresensiController extends Controller
         return [$request, $toggle, $presensi];
     }
 
-    public function control(Request $request)
+    public function download(Request $request)
     {
-        // $Presensi::where('link', $request->link)->first();
-        // echo "asd";
-        // return $request;
-    }
-
-    public function file($filename)
-    {
+        $file = Storage::get($request->link.'.json');
+        // $file = $file[$request->id];
+        return $file;
     }
 }

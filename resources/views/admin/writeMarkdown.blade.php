@@ -12,4 +12,5 @@
             <span class="text-danger">{{ $errors->first('markdown') }}</span>
         @endif
     </div>
+    <script src="{{ asset('js/editor.js') }}"></script>
 @endsection

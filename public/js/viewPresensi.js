@@ -1,5 +1,5 @@
 timeleft = $('#timer').data('countdown');
-console.log(timeleft);
+// console.log(timeleft);
 
 var qrcode = new QRCode("qrcode", {
     text: $('#pin').html(),
@@ -14,7 +14,7 @@ var downloadTimer = setInterval(function () {
     $('#refresh').on('click', function () {
         timeleft = 0;
     });
-    console.log(timeleft);
+    // console.log(timeleft);
     if (timeleft == 0) {
         timeleft = $('#timer').data('countdown');
         link = $('#link').val();
@@ -46,8 +46,8 @@ var downloadTimer = setInterval(function () {
     }
 
     let temp = timeleft % 2;
-    // console.log(temp, timeleft);
     if (temp == 0) {
+        // console.log(temp, timeleft);
         link = $('#link').val();
         $.ajax({
             url: "/admin/presensi/refreshname",
@@ -61,9 +61,9 @@ var downloadTimer = setInterval(function () {
                 list = "";
                 data.forEach(element => {
                     list += "<div class='btn btn-dark mx-2 my-1 col-lg-3'>" + element['nama'] + "</div>";
-                    $('#presensidata').html(list);
                     // console.log(list);
                 });
+                $('#presensidata').html(list);
             },
             error: function () {
                 console.log("Something went wrong");
@@ -76,10 +76,10 @@ var downloadTimer = setInterval(function () {
     timeleft -= 1;
 }, 1000);
 
+link = $('#link').val();
 $('#presensitoggle').on('change', function () {
     console.log($(this).prop('checked'));
     toggle = $(this).prop('checked');
-    link = $('#link').val();
     $.ajax({
         url: "/admin/presensi/toggle",
         type: "GET",
@@ -92,7 +92,7 @@ $('#presensitoggle').on('change', function () {
 
             // This here will print the
             // retrieved json on the console.
-            console.log(data);
+            // console.log(data);
             // $(this).switchButton(data[])
         },
         error: function () {
@@ -112,4 +112,74 @@ function toTimeFormat(seconds) {
         seconds.toString().padStart(2, '0');
 
     return timeString;
+}
+
+$("[id^='delete']").on('click', function () {
+    id = $(this).attr('id');
+    id = id.replace('delete', '');
+    console.log(id)
+    $.ajax({
+        url: "/admin/presensi/remove",
+        type: "GET",
+        dataType: 'json',
+        data: {
+            link: link,
+            id: id,
+        },
+        success: function (data) {
+
+            // This here will print the
+            // retrieved json on the console.
+            console.log(data);
+            // $(this).switchButton(data[])
+        },
+        error: function (ts) {
+            console.log("error " + ts.status + " " + ts.statusText);
+        },
+    });
+});
+
+$("[data-file]").on('click', function () {
+    file = $(this).data('file');
+    console.log(file);
+    download(file);
+});
+
+function download(file) {
+    $.ajax({
+        url: "/admin/presensi/download",
+        type: "GET",
+        dataType: 'json',
+        data: {
+            file: file,
+            link: link,
+        },
+        success: function (data) {
+
+            // This here will print the
+            // retrieved json on the console.
+            console.log(data);
+
+            json_data = JSON.stringify(data, null, "\t");
+            console.log(json_data);
+            blob = new Blob([json_data], { type: "application/octetstream"});
+            isIE = false || !!document.documentMode;
+
+            if (isIE) {
+                window.navigator.msSaveBlob(blob, link+"."+file);
+            } else {
+                var url = window.URL || window.webkitURL;
+                downloadLink = url.createObjectURL(blob);
+                var a = $("<a />");
+                a.attr("download", link+"."+file);
+                a.attr("href", downloadLink);
+                $("body").append(a);
+                a[0].click();
+                $("body").remove(a);
+            }
+        },
+        error: function (ts) {
+            console.log("error " + ts.status + " " + ts.statusText);
+        },
+    });
 }

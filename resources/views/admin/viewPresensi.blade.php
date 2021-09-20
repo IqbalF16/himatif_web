@@ -38,15 +38,43 @@
                             <div id='qrcode' class="center">
                             </div>
                             <h4 id="pin">{{ $presensi->pin }}</h4>
-                        </td>
-                        <td class="" style=" overflow-y: scroll; overflow-x: hidden; height: 50vh; width: 75vw;; position: fixed;">
-                            <div class="row justify-content-around" id="presensidata">
-                                @foreach ($data as $d)
-                                    <div class="btn btn-dark mx-2 my-1 col-lg-3">
-                                        {{ $d->nama }}
-                                    </div>
-                                @endforeach
+                            <div class="border border-dark" style="overflow-y: scroll; height: 20vh;">
+                                <button class="btn btn-dark mb-1" type="button" data-file="json">Download as JSON</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="xlsx">Download as xlsx</button>
+                                <button class="btn btn-dark mb-1" type="button" data-file="csv">Download as csv</button>
                             </div>
+                        </td>
+                        <td class="" style=" overflow-y: scroll; overflow-x: hidden; height: 50vh; width: 75vw;;
+                            position: fixed;">
+                            <table class="table table-light table-hover table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>NIM</th>
+                                        <th>Waktu</th>
+                                        <th>Hapus</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($data as $id => $d)
+                                        <tr>
+                                            <td>
+                                                {{ $d->nama }}
+                                            </td>
+                                            <td>
+                                                {{ $d->nim }}
+                                            </td>
+                                            <td>
+                                                {{ $d->datetime }}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" type="button"
+                                                    id="delete{{ $id }}">Delete</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </td>
                     </tr>
                 </tbody>
