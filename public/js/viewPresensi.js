@@ -59,10 +59,11 @@ var downloadTimer = setInterval(function () {
             success: function (data) {
                 // console.log(data);
                 list = "";
-                data.forEach(element => {
-                    list += "<div class='btn btn-dark mx-2 my-1 col-lg-3'>" + element['nama'] + "</div>";
-                    // console.log(list);
+                $.each(data, function(index, value){
+                    list += "<div class='btn btn-dark mx-2 my-1 col-lg-3'>" + value['nama'] + "</div>";
                 });
+                    // console.log(list);
+                console.log(list);
                 $('#presensidata').html(list);
             },
             error: function () {

@@ -28,4 +28,5 @@
             @endforeach
         </div>
     </div>
+    <script src="{{ asset('js/view.js') }}" defer></script>
 @endsection

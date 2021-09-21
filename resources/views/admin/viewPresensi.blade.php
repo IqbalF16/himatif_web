@@ -98,7 +98,6 @@
     <script src="{{ asset('js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/es6-promise.auto.min.js') }}"></script>
     <script src="{{ asset('js/html2canvas.min.js') }}"></script>
-    <script src="{{ asset('js/tableExport.min.js') }}"></script>
     <script src="{{ asset('js/qrcode.js') }}"></script>
     <script src="{{ asset('js/viewPresensi.js') }}"></script>
     <style>

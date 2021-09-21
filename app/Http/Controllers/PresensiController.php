@@ -42,9 +42,13 @@ class PresensiController extends Controller
 
     public function deleteData(Request $request)
     {
-        $data = json_decode(Storage::get($request->link.".json"));
+        $data_json = Storage::get($request->link.".json");
+        $data = json_decode($data_json);
         unset($data[$request->id]);
-        return json_encode($data, JSON_PRETTY_PRINT);
+        $data_new = $data;
+        $data = json_encode($data, JSON_PRETTY_PRINT);
+        Storage::put($request->link.".json", $data);
+        return $data_new;
     }
 
     public function view(Request $request, $link)
