@@ -28,9 +28,12 @@
                 </colgroup>
                 <tbody>
                     <tr>
-                        <td colspan="3" class="text-center">
+                        <td colspan="2" class="text-center">
                             <a class="text-dark" href="{{ route('checkin', $presensi->link) }}"
                                 target="_blank">{{ route('checkin', $presensi->link) }}</a>
+                            <button id="refreshdata" class="btn btn-secondary float-right" type="button"><i class="fa fa-refresh"
+                                    aria-hidden="true"></i>
+                            </button>
                         </td>
                     </tr>
                     <tr>
@@ -54,37 +57,37 @@
                         </td>
                         <td class="" style=" overflow-y: scroll; overflow-x: hidden; height: 50vh; width: 75vw;;
                             position: fixed;">
-                            <div id="datapresensi">
-                            <table class="table table-light table-hover table-striped">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>NIM</th>
-                                        <th>Waktu</th>
-                                        <th>Hapus</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($data as $id => $d)
+                            <div>
+                                <table class="table table-light table-hover table-striped">
+                                    <thead class="thead-dark">
                                         <tr>
-                                            <td>
-                                                {{ $d->nama }}
-                                            </td>
-                                            <td>
-                                                {{ $d->nim }}
-                                            </td>
-                                            <td>
-                                                {{ $d->datetime }}
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-danger" type="button"
-                                                    id="delete{{ $id }}">Delete</button>
-                                            </td>
+                                            <th>Nama</th>
+                                            <th>NIM</th>
+                                            <th>Waktu</th>
+                                            <th>Hapus</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody id="presensidata">
+                                        @foreach ($data as $id => $d)
+                                            <tr>
+                                                <td>
+                                                    {{ $d->nama }}
+                                                </td>
+                                                <td>
+                                                    {{ $d->nim }}
+                                                </td>
+                                                <td>
+                                                    {{ $d->datetime }}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-danger" type="button"
+                                                        id="delete{{ $id }}">Delete</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

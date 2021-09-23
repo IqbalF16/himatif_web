@@ -44,36 +44,7 @@ var downloadTimer = setInterval(function () {
     } else {
         document.getElementById("timer").innerHTML = toTimeFormat(timeleft);
     }
-
-    let temp = timeleft % 2;
-    if (temp == 0) {
-        // console.log(temp, timeleft);
-        link = $('#link').val();
-        $.ajax({
-            url: "/admin/presensi/refreshname",
-            type: "GET",
-            dataType: 'json',
-            data: {
-                link: link,
-            },
-            success: function (data) {
-                // console.log(data);
-                list = "";
-                $.each(data, function(index, value){
-                    list += "<div class='btn btn-dark mx-2 my-1 col-lg-3'>" + value['nama'] + "</div>";
-                });
-                    // console.log(list);
-                console.log(list);
-                $('#presensidata').html(list);
-            },
-            error: function () {
-                console.log("Something went wrong");
-            },
-        });
-        document.getElementById("isi").innerHTML = toTimeFormat(timeleft);
-    } else {
-        document.getElementById("isi").innerHTML = toTimeFormat(timeleft);
-    }
+    refreshdata();
     timeleft -= 1;
 }, 1000);
 
@@ -151,5 +122,36 @@ function downloaddata(link, file) {
         fileName: link,
         type: file,
         ignoreColumn: [3]
+    });
+}
+
+$("#refreshdata").on('click', function () {
+    
+});
+
+function refreshdata(){
+    link = $('#link').val();
+    list = "";
+    $.ajax({
+        url: "/admin/presensi/refreshname",
+        type: "GET",
+        dataType: 'json',
+        data: {
+            link: link,
+        },
+        success: function (data) {
+            // console.log(data);
+            
+            for (i = 0; i < data.length; i++) {
+                list += '<tr><td>' +
+                data[i]["nama"] + '</td><td>' + data[i]["nim"] + '</td ><td>' + data[i]["datetime"] +
+                '</td><td><button class="btn btn-danger" type="button"id="delete' + i + '">Delete</button></td></tr >';
+            }
+            console.log(list);
+            $('#presensidata').html(list);
+        },
+        error: function () {
+            console.log("Something went wrong");
+        },
     });
 }

@@ -45,8 +45,8 @@ class PresensiController extends Controller
         $data_json = Storage::get($request->link.".json");
         $data = json_decode($data_json);
         unset($data[$request->id]);
-        $data_new = $data;
-        $data = json_encode($data, JSON_PRETTY_PRINT);
+        $data_process = array_values($data);
+        $data_new = json_encode($data, JSON_PRETTY_PRINT);
         Storage::put($request->link.".json", $data);
         return $data_new;
     }
