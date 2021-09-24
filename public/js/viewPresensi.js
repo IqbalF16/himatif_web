@@ -86,30 +86,31 @@ function toTimeFormat(seconds) {
     return timeString;
 }
 
-$("[id^='delete']").on('click', function () {
-    id = $(this).attr('id');
-    id = id.replace('delete', '');
-    console.log(id)
-    $.ajax({
-        url: "/admin/presensi/remove",
-        type: "GET",
-        dataType: 'json',
-        data: {
-            link: link,
-            id: id,
-        },
-        success: function (data) {
+// $("[data-delete]").on('click', function () {
+//     id = $(this).data('delete');
+//     console.log(id)
+//     $.ajax({
+//         url: "/admin/presensi/remove",
+//         type: "GET",
+//         dataType: 'json',
+//         data: {
+//             link: link,
+//             id: id,
+//         },
+//         success: function (data) {
+//             console.log(data);
+//             $(this).remove();
+//         },
+//         error: function (ts) {
+//             console.log("error " + ts.status + " " + ts.statusText);
+//         },
+//     });
+//     // console.log($(this).data('delete'));
+// });
 
-            // This here will print the
-            // retrieved json on the console.
-            console.log(data);
-            // $(this).switchButton(data[])
-        },
-        error: function (ts) {
-            console.log("error " + ts.status + " " + ts.statusText);
-        },
-    });
-});
+// $('#refreshdata').on('click', function () {
+//     refreshdata();
+// });
 
 $("[data-file]").on('click', function () {
     file = $(this).data('file');
@@ -118,18 +119,14 @@ $("[data-file]").on('click', function () {
 });
 
 function downloaddata(link, file) {
-    $('#datapresensi').tableExport({
+    $('#tablepresensi').tableExport({
         fileName: link,
         type: file,
         ignoreColumn: [3]
     });
 }
 
-$("#refreshdata").on('click', function () {
-    
-});
-
-function refreshdata(){
+function refreshdata() {
     link = $('#link').val();
     list = "";
     $.ajax({
@@ -140,15 +137,16 @@ function refreshdata(){
             link: link,
         },
         success: function (data) {
-            // console.log(data);
-            
+            data = JSON.parse(data);
+            console.log(data[0].nama);
+            $('#presensidata').html("");
             for (i = 0; i < data.length; i++) {
-                list += '<tr><td>' +
-                data[i]["nama"] + '</td><td>' + data[i]["nim"] + '</td ><td>' + data[i]["datetime"] +
-                '</td><td><button class="btn btn-danger" type="button"id="delete' + i + '">Delete</button></td></tr >';
+                $('#presensidata').append('<tr><td>' +
+                    data[i]["nama"] + '</td><td>' + data[i]["nim"] + '</td ><td>' + data[i]["datetime"] +
+                    '</td></tr >');
             }
-            console.log(list);
-            $('#presensidata').html(list);
+
+            // $('#presensidata').html(list);
         },
         error: function () {
             console.log("Something went wrong");

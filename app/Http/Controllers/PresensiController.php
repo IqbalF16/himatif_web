@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Presensi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -46,9 +47,9 @@ class PresensiController extends Controller
         $data = json_decode($data_json);
         unset($data[$request->id]);
         $data_process = array_values($data);
-        $data_new = json_encode($data, JSON_PRETTY_PRINT);
-        Storage::put($request->link.".json", $data);
-        return $data_new;
+        $data_new = json_encode($data_process, JSON_PRETTY_PRINT);
+        Storage::put($request->link.".json", $data_new);
+        return Response::json($data_new);
     }
 
     public function view(Request $request, $link)
@@ -145,7 +146,7 @@ class PresensiController extends Controller
     {
         $data = Storage::get($request->link.'.json');
 
-        return $data;
+        return Response::json($data);
     }
 
     public function toggle(Request $request)

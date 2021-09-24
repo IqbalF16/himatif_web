@@ -21,7 +21,7 @@
         </div>
         <div class="
                         card-text">
-            <table class="table table-borderless" style="height: 20vh">
+            <table id="tablepresensi" class="table table-borderless" style="height: 20vh">
                 <colgroup>
                     <col style="width: 5%">
                     <col>
@@ -31,9 +31,8 @@
                         <td colspan="2" class="text-center">
                             <a class="text-dark" href="{{ route('checkin', $presensi->link) }}"
                                 target="_blank">{{ route('checkin', $presensi->link) }}</a>
-                            <button id="refreshdata" class="btn btn-secondary float-right" type="button"><i class="fa fa-refresh"
-                                    aria-hidden="true"></i>
-                            </button>
+                            <button class="btn btn-secondary float-right" type="button" id="refreshdata"><i
+                                    class="fa fa-refresh"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -42,17 +41,28 @@
                             </div>
                             <h4 id="pin">{{ $presensi->pin }}</h4>
                             <div class="border border-dark" style="overflow-y: scroll; height: 20vh;">
-                                <button class="btn btn-dark mb-1" type="button" data-file="json">Download as JSON</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="csv">Download as CSV</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="doc">Download as DOC</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="pdf">Download as PDF</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="png">Download as PNG</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="sql">Download as SQL</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="tsv">Download as TSV</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="txt">Download as TXT</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="xls">Download as XLS</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="xlsx">Download as XLSX</button>
-                                <button class="btn btn-dark mb-1" type="button" data-file="xml">Download as XML</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_json" data-file="json">Download
+                                    as JSON</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_csv" data-file="csv">Download
+                                    as CSV</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_doc" data-file="doc">Download
+                                    as DOC</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_pdf" data-file="pdf">Download
+                                    as PDF</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_png" data-file="png">Download
+                                    as PNG</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_sql" data-file="sql">Download
+                                    as SQL</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_tsv" data-file="tsv">Download
+                                    as TSV</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_txt" data-file="txt">Download
+                                    as TXT</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_xls" data-file="xls">Download
+                                    as XLS</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_xlsx" data-file="xlsx">Download
+                                    as XLSX</button>
+                                <button class="btn btn-dark mb-1" type="button" id="download_xml" data-file="xml">Download
+                                    as XML</button>
                             </div>
                         </td>
                         <td class="" style=" overflow-y: scroll; overflow-x: hidden; height: 50vh; width: 75vw;;
@@ -64,7 +74,6 @@
                                             <th>Nama</th>
                                             <th>NIM</th>
                                             <th>Waktu</th>
-                                            <th>Hapus</th>
                                         </tr>
                                     </thead>
                                     <tbody id="presensidata">
@@ -78,10 +87,6 @@
                                                 </td>
                                                 <td>
                                                     {{ $d->datetime }}
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-danger" type="button"
-                                                        id="delete{{ $id }}">Delete</button>
                                                 </td>
                                             </tr>
                                         @endforeach
